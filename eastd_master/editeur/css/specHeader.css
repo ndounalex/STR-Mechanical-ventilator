@@ -1,0 +1,42 @@
+#specHeaderModal .list-group {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+#specHeaderModal .list-group-item {
+    padding-top: 5px;
+    padding-bottom: 1px;
+}
+
+.filePathLabel {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 95%;
+    padding-top: 0;
+    margin-bottom: 0;
+}
+
+.close {
+    position: absolute;
+    top: 5px;
+    right: 20px;
+}
+
+#specHeaderModal .modal-body {
+    padding-bottom: 0;
+}
+
+.form-check {
+    margin-left: 25px;
+}
+
+.invalid-feedback {
+    margin-left: 25%;
+}
+
+.list-group-flush li:first-child {
+    border-top: none;
+}
+.list-group-flush li:last-child {
+    border-bottom: none;
+}

@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="specs">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/tests/perf/specs.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

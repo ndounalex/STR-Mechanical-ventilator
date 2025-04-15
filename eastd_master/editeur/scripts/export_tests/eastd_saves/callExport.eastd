@@ -1,0 +1,950 @@
+{
+  "iastd": {
+    "target": "ocaml",
+    "imports": [],
+    "type_definitions": {
+      "schemas": [],
+      "native_types": {},
+      "events": []
+    },
+    "top_level_astds": [
+      {
+        "name": "A1",
+        "parameters": [],
+        "type": "QChoice",
+        "typed_astd": {
+          "attributes": [],
+          "code": "",
+          "quantified_variable": {
+            "name": "X",
+            "type": "int",
+            "domain": {
+              "type": "UnboundedDomain"
+            }
+          },
+          "sub_astd": {
+            "name": "",
+            "type": "Kleene",
+            "typed_astd": {
+              "attributes": [
+                {
+                  "name": "att1",
+                  "type": "int",
+                  "initial_value": 0
+                }
+              ],
+              "code": "",
+              "sub_astd": {
+                "name": "",
+                "type": "Sequence",
+                "typed_astd": {
+                  "attributes": [],
+                  "code": "",
+                  "left_astd": {
+                    "name": "SUB1",
+                    "type": "Automaton",
+                    "typed_astd": {
+                      "attributes": [],
+                      "code": "",
+                      "states": [
+                        {
+                          "name": "S0",
+                          "astd": {
+                            "type": "Elem",
+                            "typed_astd": {}
+                          },
+                          "entry_code": "",
+                          "stay_code": "",
+                          "exit_code": ""
+                        },
+                        {
+                          "name": "S1",
+                          "astd": {
+                            "type": "Elem",
+                            "typed_astd": {}
+                          },
+                          "entry_code": "",
+                          "stay_code": "",
+                          "exit_code": ""
+                        }
+                      ],
+                      "transitions": [
+                        {
+                          "arrow_type": "Local",
+                          "arrow": {
+                            "from_state_name": "S0",
+                            "to_state_name": "S1"
+                          },
+                          "event_template": {
+                            "label": "e1",
+                            "parameters": [],
+                            "when": []
+                          },
+                          "guard": "",
+                          "action": "",
+                          "from_final_state_only": false
+                        },
+                        {
+                          "arrow_type": "Local",
+                          "arrow": {
+                            "from_state_name": "S1",
+                            "to_state_name": "S1"
+                          },
+                          "event_template": {
+                            "label": "e2",
+                            "parameters": [],
+                            "when": []
+                          },
+                          "guard": "",
+                          "action": "",
+                          "from_final_state_only": false
+                        }
+                      ],
+                      "shallow_final_state_names": [
+                        "S0"
+                      ],
+                      "initial_state_name": "S0"
+                    }
+                  },
+                  "right_astd": {
+                    "name": "Unnamed1",
+                    "type": "Call",
+                    "typed_astd": {
+                      "called_astd_name": "A2",
+                      "call_arguments": [
+                        {
+                          "name": "p",
+                          "value": {
+                            "type": "Expression",
+                            "content": "att1"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      {
+        "name": "A2",
+        "parameters": [
+          {
+            "name": "p",
+            "type": "int",
+            "domain": {
+              "type": "UnboundedDomain"
+            }
+          }
+        ],
+        "type": "Guard",
+        "typed_astd": {
+          "attributes": [],
+          "code": "",
+          "guard": "",
+          "sub_astd": {
+            "name": "",
+            "type": "Automaton",
+            "typed_astd": {
+              "attributes": [],
+              "code": "",
+              "states": [
+                {
+                  "name": "SubAuto",
+                  "astd": {
+                    "name": "SubAuto",
+                    "type": "Automaton",
+                    "typed_astd": {
+                      "attributes": [],
+                      "code": "",
+                      "states": [
+                        {
+                          "name": "S0",
+                          "astd": {
+                            "type": "Elem",
+                            "typed_astd": {}
+                          },
+                          "entry_code": "",
+                          "stay_code": "",
+                          "exit_code": ""
+                        },
+                        {
+                          "name": "SubChoice",
+                          "astd": {
+                            "name": "SubChoice",
+                            "type": "QChoice",
+                            "typed_astd": {
+                              "attributes": [],
+                              "code": "",
+                              "quantified_variable": {
+                                "name": "Y",
+                                "type": "int",
+                                "domain": {
+                                  "type": "UnboundedDomain"
+                                }
+                              },
+                              "sub_astd": {
+                                "name": "SubAuto2",
+                                "type": "Automaton",
+                                "typed_astd": {
+                                  "attributes": [],
+                                  "code": "",
+                                  "states": [
+                                    {
+                                      "name": "S1",
+                                      "astd": {
+                                        "type": "Elem",
+                                        "typed_astd": {}
+                                      },
+                                      "entry_code": "",
+                                      "stay_code": "",
+                                      "exit_code": ""
+                                    },
+                                    {
+                                      "name": "S0",
+                                      "astd": {
+                                        "type": "Elem",
+                                        "typed_astd": {}
+                                      },
+                                      "entry_code": "",
+                                      "stay_code": "",
+                                      "exit_code": ""
+                                    },
+                                    {
+                                      "name": "H",
+                                      "astd": {
+                                        "type": "Elem",
+                                        "typed_astd": {}
+                                      },
+                                      "entry_code": "",
+                                      "stay_code": "",
+                                      "exit_code": ""
+                                    }
+                                  ],
+                                  "transitions": [
+                                    {
+                                      "arrow_type": "Local",
+                                      "arrow": {
+                                        "from_state_name": "S0",
+                                        "to_state_name": "S1"
+                                      },
+                                      "event_template": {
+                                        "label": "w1",
+                                        "parameters": [],
+                                        "when": []
+                                      },
+                                      "guard": "",
+                                      "action": "",
+                                      "from_final_state_only": false
+                                    },
+                                    {
+                                      "arrow_type": "Local",
+                                      "arrow": {
+                                        "from_state_name": "S0",
+                                        "to_state_name": "H"
+                                      },
+                                      "event_template": {
+                                        "label": "w2",
+                                        "parameters": [],
+                                        "when": []
+                                      },
+                                      "guard": "",
+                                      "action": "",
+                                      "from_final_state_only": false
+                                    },
+                                    {
+                                      "arrow_type": "Local",
+                                      "arrow": {
+                                        "from_state_name": "S1",
+                                        "to_state_name": "S1"
+                                      },
+                                      "event_template": {
+                                        "label": "w1",
+                                        "parameters": [],
+                                        "when": []
+                                      },
+                                      "guard": "",
+                                      "action": "",
+                                      "from_final_state_only": false
+                                    },
+                                    {
+                                      "arrow_type": "Local",
+                                      "arrow": {
+                                        "from_state_name": "S1",
+                                        "to_state_name": "H"
+                                      },
+                                      "event_template": {
+                                        "label": "w2",
+                                        "parameters": [],
+                                        "when": []
+                                      },
+                                      "guard": "",
+                                      "action": "",
+                                      "from_final_state_only": false
+                                    }
+                                  ],
+                                  "shallow_final_state_names": [
+                                    "S1"
+                                  ],
+                                  "initial_state_name": "S0"
+                                }
+                              }
+                            }
+                          },
+                          "entry_code": "",
+                          "stay_code": "",
+                          "exit_code": ""
+                        }
+                      ],
+                      "transitions": [
+                        {
+                          "arrow_type": "FromSub",
+                          "arrow": {
+                            "from_state_name": "H",
+                            "to_state_name": "S0",
+                            "through_state_name": "SubAuto"
+                          },
+                          "event_template": {
+                            "label": "e1",
+                            "parameters": [],
+                            "when": []
+                          },
+                          "guard": "",
+                          "action": "",
+                          "from_final_state_only": false
+                        }
+                      ],
+                      "shallow_final_state_names": [
+                        "S0"
+                      ],
+                      "initial_state_name": "S0",
+                      "deep_final_state_names": []
+                    }
+                  },
+                  "entry_code": "",
+                  "stay_code": "",
+                  "exit_code": ""
+                },
+                {
+                  "name": "S2",
+                  "astd": {
+                    "type": "Elem",
+                    "typed_astd": {}
+                  },
+                  "entry_code": "",
+                  "stay_code": "",
+                  "exit_code": ""
+                }
+              ],
+              "transitions": [
+                {
+                  "arrow_type": "ToSub",
+                  "arrow": {
+                    "from_state_name": "S2",
+                    "to_state_name": "S0",
+                    "through_state_name": "SubAuto"
+                  },
+                  "event_template": {
+                    "label": "e1",
+                    "parameters": [],
+                    "when": []
+                  },
+                  "guard": "",
+                  "action": "",
+                  "from_final_state_only": false
+                }
+              ],
+              "shallow_final_state_names": [
+                "SubAuto"
+              ],
+              "deep_final_state_names": [],
+              "initial_state_name": "S2"
+            }
+          }
+        }
+      }
+    ]
+  },
+  "editor": {
+    "id": 45,
+    "schemas": [],
+    "native_types": [],
+    "imports": [],
+    "eventSignatures": [],
+    "target": "OCaml",
+    "files": [
+      {
+        "astd": {
+          "id": "id_1",
+          "position": {
+            "x": 10,
+            "y": 2
+          },
+          "width": 910,
+          "height": 670,
+          "label": "A1",
+          "initial": false,
+          "entryCode": "",
+          "stayCode": "",
+          "exitCode": "",
+          "class": "astd",
+          "tabs": [
+            {
+              "id": "id_3",
+              "label": "",
+              "parent": "id_1",
+              "attributes": [],
+              "code": "",
+              "test": false,
+              "parameter_name": "",
+              "parameter_domain": "",
+              "variable": {
+                "parent": "id_3",
+                "label": "X",
+                "type": "int",
+                "domain": "",
+                "domainType": "UnboundedDomain"
+              },
+              "class": "| x : T"
+            },
+            {
+              "id": "id_5",
+              "label": "",
+              "parent": "id_1",
+              "attributes": [
+                {
+                  "parent": "id_5",
+                  "label": "att1",
+                  "type": "int",
+                  "value": "0"
+                }
+              ],
+              "code": "",
+              "test": false,
+              "parameter_name": "",
+              "parameter_domain": "",
+              "class": "★ Closure"
+            },
+            {
+              "id": "id_7",
+              "label": "",
+              "parent": "id_1",
+              "attributes": [],
+              "code": "",
+              "test": false,
+              "parameter_name": "",
+              "parameter_domain": "",
+              "class": "➜ Sequence"
+            }
+          ],
+          "state": "non-final",
+          "items": [
+            {
+              "id": "id_8",
+              "parent": "id_1",
+              "position": {
+                "x": 140.00613403320312,
+                "y": 188.0156707763672
+              },
+              "width": 250,
+              "height": 250,
+              "label": "SUB1",
+              "initial": false,
+              "entryCode": "",
+              "stayCode": "",
+              "exitCode": "",
+              "class": "astd",
+              "tabs": [
+                {
+                  "id": "id_10",
+                  "label": "",
+                  "parent": "id_8",
+                  "attributes": [],
+                  "code": "",
+                  "test": false,
+                  "parameter_name": "",
+                  "parameter_domain": "",
+                  "class": "Automaton"
+                }
+              ],
+              "state": "non-final",
+              "items": [
+                {
+                  "id": "id_13",
+                  "parent": "id_8",
+                  "position": {
+                    "x": 25,
+                    "y": 156
+                  },
+                  "width": 30.72,
+                  "height": 30,
+                  "label": "S0",
+                  "initial": true,
+                  "entryCode": "",
+                  "stayCode": "",
+                  "exitCode": "",
+                  "class": "state",
+                  "final": true,
+                  "history": false,
+                  "deephistory": false
+                },
+                {
+                  "id": "id_14",
+                  "parent": "id_8",
+                  "position": {
+                    "x": 144.0852445800781,
+                    "y": 112.07773725585935
+                  },
+                  "width": 30.72,
+                  "height": 30,
+                  "label": "S1",
+                  "initial": false,
+                  "entryCode": "",
+                  "stayCode": "",
+                  "exitCode": "",
+                  "class": "state",
+                  "final": false,
+                  "history": false,
+                  "deephistory": false
+                }
+              ],
+              "parameters": [],
+              "test_parameters": []
+            },
+            {
+              "id": "id_9",
+              "parent": "id_1",
+              "position": {
+                "x": 523.0579365136718,
+                "y": 189.06698497558594
+              },
+              "width": 250,
+              "height": 250,
+              "label": "Unnamed1",
+              "initial": false,
+              "entryCode": "",
+              "stayCode": "",
+              "exitCode": "",
+              "class": "astd",
+              "tabs": [
+                {
+                  "id": "id_12",
+                  "label": "",
+                  "parent": "id_9",
+                  "attributes": [],
+                  "code": "",
+                  "test": false,
+                  "parameter_name": "",
+                  "parameter_domain": "",
+                  "class": "Call",
+                  "target": "A2",
+                  "argument": [
+                    "att1"
+                  ]
+                }
+              ],
+              "state": "non-final",
+              "items": [],
+              "parameters": [],
+              "test_parameters": []
+            }
+          ],
+          "parameters": [],
+          "test_parameters": []
+        },
+        "links": [
+          {
+            "id": "id_11",
+            "source": "id_8",
+            "destination": "id_9",
+            "details": true,
+            "parameters": "",
+            "guard": "",
+            "when": "",
+            "displayNumber": 3,
+            "code": "",
+            "label": "?",
+            "type": "Sequence",
+            "inflexion": [],
+            "test_parameters": [],
+            "parameterize": []
+          },
+          {
+            "id": "id_15",
+            "source": "id_13",
+            "destination": "id_14",
+            "details": true,
+            "parameters": "",
+            "guard": "",
+            "when": "",
+            "displayNumber": 3,
+            "code": "",
+            "label": "e1",
+            "type": "default",
+            "inflexion": [],
+            "test_parameters": [],
+            "parameterize": []
+          },
+          {
+            "id": "id_16",
+            "source": "id_14",
+            "destination": "id_14",
+            "details": true,
+            "parameters": "",
+            "guard": "",
+            "when": "",
+            "displayNumber": 3,
+            "code": "",
+            "label": "e2",
+            "type": "default",
+            "inflexion": [],
+            "test_parameters": [],
+            "parameterize": []
+          }
+        ]
+      },
+      {
+        "astd": {
+          "id": "id_18",
+          "position": {
+            "x": 10,
+            "y": 2
+          },
+          "width": 910,
+          "height": 670,
+          "label": "A2",
+          "initial": false,
+          "entryCode": "",
+          "stayCode": "",
+          "exitCode": "",
+          "class": "astd",
+          "tabs": [
+            {
+              "id": "id_29",
+              "label": "",
+              "parent": "id_18",
+              "attributes": [],
+              "code": "",
+              "test": false,
+              "parameter_name": "",
+              "parameter_domain": "",
+              "class": "⇒ Guard",
+              "predicate": ""
+            },
+            {
+              "id": "id_32",
+              "label": "",
+              "parent": "id_18",
+              "attributes": [],
+              "code": "",
+              "test": false,
+              "parameter_name": "",
+              "parameter_domain": "",
+              "class": "Automaton"
+            }
+          ],
+          "state": "non-final",
+          "items": [
+            {
+              "id": "id_20",
+              "parent": "id_18",
+              "position": {
+                "x": 175.33966962890622,
+                "y": 65.31591169433594
+              },
+              "width": 659.971,
+              "height": 501.971,
+              "label": "SubAuto",
+              "initial": false,
+              "entryCode": "",
+              "stayCode": "",
+              "exitCode": "",
+              "class": "astd",
+              "tabs": [
+                {
+                  "id": "id_24",
+                  "label": "",
+                  "parent": "id_20",
+                  "attributes": [],
+                  "code": "",
+                  "test": false,
+                  "parameter_name": "",
+                  "parameter_domain": "",
+                  "class": "Automaton"
+                }
+              ],
+              "state": "shallow-final",
+              "items": [
+                {
+                  "id": "id_25",
+                  "parent": "id_20",
+                  "position": {
+                    "x": 25.058267041015597,
+                    "y": 231.07047407226563
+                  },
+                  "width": 65.6925,
+                  "height": 65.9835,
+                  "label": "S0",
+                  "initial": true,
+                  "entryCode": "",
+                  "stayCode": "",
+                  "exitCode": "",
+                  "class": "state",
+                  "final": true,
+                  "history": false,
+                  "deephistory": false
+                },
+                {
+                  "id": "id_33",
+                  "parent": "id_20",
+                  "position": {
+                    "x": 163.8203520019531,
+                    "y": 88.86798994140625
+                  },
+                  "width": 435.953,
+                  "height": 266.98,
+                  "label": "SubChoice",
+                  "initial": false,
+                  "entryCode": "",
+                  "stayCode": "",
+                  "exitCode": "",
+                  "class": "astd",
+                  "tabs": [
+                    {
+                      "id": "id_34",
+                      "label": "",
+                      "parent": "id_33",
+                      "attributes": [],
+                      "code": "",
+                      "test": false,
+                      "parameter_name": "",
+                      "parameter_domain": "",
+                      "variable": {
+                        "parent": "id_34",
+                        "label": "Y",
+                        "type": "int",
+                        "domain": "",
+                        "domainType": "UnboundedDomain"
+                      },
+                      "class": "| x : T"
+                    },
+                    {
+                      "id": "id_35",
+                      "label": "SubAuto2",
+                      "parent": "id_33",
+                      "attributes": [],
+                      "code": "",
+                      "test": false,
+                      "parameter_name": "",
+                      "parameter_domain": "",
+                      "class": "Automaton"
+                    }
+                  ],
+                  "state": "non-final",
+                  "items": [
+                    {
+                      "id": "id_37",
+                      "parent": "id_33",
+                      "position": {
+                        "x": 325.00681796875006,
+                        "y": 93
+                      },
+                      "width": 30.72,
+                      "height": 30,
+                      "label": "S1",
+                      "initial": false,
+                      "entryCode": "",
+                      "stayCode": "",
+                      "exitCode": "",
+                      "class": "state",
+                      "final": true,
+                      "history": false,
+                      "deephistory": false
+                    },
+                    {
+                      "id": "id_36",
+                      "parent": "id_33",
+                      "position": {
+                        "x": 88.08063642578122,
+                        "y": 66.08616010742185
+                      },
+                      "width": 30.72,
+                      "height": 30,
+                      "label": "S0",
+                      "initial": true,
+                      "entryCode": "",
+                      "stayCode": "",
+                      "exitCode": "",
+                      "class": "state",
+                      "final": false,
+                      "history": false,
+                      "deephistory": false
+                    },
+                    {
+                      "id": "id_38",
+                      "parent": "id_33",
+                      "position": {
+                        "x": 75.05506269531247,
+                        "y": 203.1023649414062
+                      },
+                      "width": 30,
+                      "height": 30,
+                      "label": "H",
+                      "initial": false,
+                      "entryCode": "",
+                      "stayCode": "",
+                      "exitCode": "",
+                      "class": "state",
+                      "final": false,
+                      "history": true,
+                      "deephistory": false
+                    }
+                  ],
+                  "parameters": [],
+                  "test_parameters": []
+                }
+              ],
+              "parameters": [],
+              "test_parameters": []
+            },
+            {
+              "id": "id_27",
+              "parent": "id_18",
+              "position": {
+                "x": 218.1647123535156,
+                "y": 669.1800474365234
+              },
+              "width": 30.72,
+              "height": 30,
+              "label": "S2",
+              "initial": true,
+              "entryCode": "",
+              "stayCode": "",
+              "exitCode": "",
+              "class": "state",
+              "final": false,
+              "history": false,
+              "deephistory": false
+            }
+          ],
+          "parameters": [
+            {
+              "parent": "id_18",
+              "label": "p",
+              "type": "int",
+              "domain": "",
+              "domainType": "UnboundedDomain"
+            }
+          ],
+          "test_parameters": []
+        },
+        "links": [
+          {
+            "id": "id_28",
+            "source": "id_27",
+            "destination": "id_25",
+            "details": true,
+            "parameters": "",
+            "guard": "",
+            "when": "",
+            "displayNumber": 3,
+            "code": "",
+            "label": "e1",
+            "type": "default",
+            "inflexion": [],
+            "test_parameters": [],
+            "parameterize": []
+          },
+          {
+            "id": "id_39",
+            "source": "id_36",
+            "destination": "id_37",
+            "details": true,
+            "parameters": "",
+            "guard": "",
+            "when": "",
+            "displayNumber": 3,
+            "code": "",
+            "label": "w1",
+            "type": "default",
+            "inflexion": [],
+            "test_parameters": [],
+            "parameterize": []
+          },
+          {
+            "id": "id_40",
+            "source": "id_36",
+            "destination": "id_38",
+            "details": true,
+            "parameters": "",
+            "guard": "",
+            "when": "",
+            "displayNumber": 3,
+            "code": "",
+            "label": "w2",
+            "type": "default",
+            "inflexion": [],
+            "test_parameters": [],
+            "parameterize": []
+          },
+          {
+            "id": "id_41",
+            "source": "id_37",
+            "destination": "id_37",
+            "details": true,
+            "parameters": "",
+            "guard": "",
+            "when": "",
+            "displayNumber": 3,
+            "code": "",
+            "label": "w1",
+            "type": "default",
+            "inflexion": [],
+            "test_parameters": [],
+            "parameterize": []
+          },
+          {
+            "id": "id_42",
+            "source": "id_37",
+            "destination": "id_38",
+            "details": true,
+            "parameters": "",
+            "guard": "",
+            "when": "",
+            "displayNumber": 3,
+            "code": "",
+            "label": "w2",
+            "type": "default",
+            "inflexion": [],
+            "test_parameters": [],
+            "parameterize": []
+          },
+          {
+            "id": "id_44",
+            "source": "id_38",
+            "destination": "id_25",
+            "details": true,
+            "parameters": "",
+            "guard": "",
+            "when": "",
+            "displayNumber": 3,
+            "code": "",
+            "label": "e1",
+            "type": "default",
+            "inflexion": [],
+            "test_parameters": [],
+            "parameterize": []
+          }
+        ]
+      }
+    ],
+    "traces": [
+      {
+        "name": "traceTest",
+        "content": "{\n   {\n      e1_1\n      {      \n         e2_$x1(\"test\")\n      }\n      $x1 : 1..10000\n   }\n}^3\n      \n    "
+      }
+    ]
+  }
+}

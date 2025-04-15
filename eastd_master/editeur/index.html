@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="css/jquery-ui-1.12.1.min.css">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/toastr.min.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/menu.css">
+    <link rel="stylesheet" type="text/css" href="css/toolbar.css">
+    <link rel="stylesheet" type="text/css" href="css/panel.css">
+    <link rel="stylesheet" type="text/css" href="css/konsole.css">
+    <link rel="stylesheet" type="text/css" href="css/playground.css">
+    <link rel="stylesheet" type="text/css" href="css/link.css">
+    <link rel="stylesheet" type="text/css" href="css/specHeader.css">
+    <link rel="stylesheet" type="text/css" href="css/traceManager.css">
+    <link rel="stylesheet" type="text/css" href="css/console.css">
+    <link rel="stylesheet" href="node_modules/jquery-contextmenu/dist/jquery.contextMenu.min.css">
+    <link rel="stylesheet" href="css/fontawesome/css/all.min.css">
+    <meta charset="UTF-8">
+</head>
+<body>
+<div id="curseur" class="infobulle"></div>
+<div id="menu">
+    <img src="css/images/logo.png" width="45px" height="45px">
+    <ul>
+        <li class="dropdown-toggle" id="projectBtn">Project</li>
+        <li class="dropdown-toggle" id="manageBtn">Manage</li>
+        <li class="dropdown-toggle" id="runBtn">Run</li>
+    </ul>
+    <div id="rightPane">
+        <i id="newConf" class="btn btn-light btn-sm fas fa-plus" onmouseover="montre('create new configuration');"
+           onmouseout="cache()" onclick="confManager.open();"></i>
+        <i id="editConf" class="btn btn-outline-warning btn-sm fas fa-tools"
+           onmouseover="montre('edit current configuration');" onmouseout="cache()" onclick="confManager.load();"></i>
+        <i id="delConf" class="btn btn-danger btn-sm fas fa-trash" onmouseover="montre('delete current configuration');"
+           onmouseout="cache()" onclick="confManager.delete();"></i>
+        <script language="javascript" type="text/javascript">
+			function GetId(id) {
+				return document.getElementById(id);
+			}
+
+			var i = false;
+
+			function move(e) {
+				if (i) {
+					if (navigator.appName !== "Microsoft Internet Explorer") {
+						GetId("curseur").style.left = e.pageX - GetId("curseur").clientWidth + "px";
+						GetId("curseur").style.top = e.pageY + 20 + "px";
+					} else {
+						GetId("curseur").style.left = 20 + event.x + document.documentElement.scrollLeft + "px";
+						GetId("curseur").style.top = 10 + event.y + document.documentElement.scrollTop + "px";
+					}
+				}
+			}
+
+			function montre(text) {
+				if (!i) {
+					GetId("curseur").style.visibility = "visible";
+					GetId("curseur").innerHTML = text;
+					i = true;
+				}
+			}
+
+			function cache() {
+				if (i) {
+					GetId("curseur").style.visibility = "hidden";
+					i = false;
+				}
+			}
+
+			document.onmousemove = move;
+        </script>
+        |
+        <select name="optConfig" id="optConfig">
+            <option value="addConf">No Configuration</option>
+        </select>
+        |
+        <i id="run" class="btn btn-success btn-sm fas fa-play" onmouseover="montre('run with current configuration');"
+           onmouseout="cache()"></i>
+        <i id="build" class="btn btn-success btn-sm fas fa-hammer" onmouseover="montre('compile');"
+           onmouseout="cache()"></i>
+        |
+        <div id="projectPathName"></div>
+    </div>
+</div>
+
+<div id="toolbar">
+    <div class="content">
+        <div class="option" id="State">
+            <div class="state" onmouseover="montre('create new state');" onmouseout="cache()">
+                <i class="far fa-circle fa-2x"></i>
+            </div>
+        </div>
+        <div class="option" id="ASTD" onmouseover="montre('create new astd');" onmouseout="cache()">
+            <div class="astd">
+                <i class="far fa-square fa-2x"></i>
+            </div>
+        </div>
+        <div class="option" id="Transition"
+             onmouseover="montre('create new transition' + '<br>' + 'click on the source and the destination to create a transition');"
+             onmouseout="cache()">
+            <div class="transition">
+                <i class="fas fa-arrow-right fa-2x"></i>
+            </div>
+        </div>
+        <div class="option" id="Cursor" onmouseover="montre('cursor');" onmouseout="cache()">
+            <div class="cursor">
+                <i class="fas fa-hand-point-up fa-2x"></i>
+            </div>
+        </div>
+    </div>
+<!--    <div>-->
+<!--        <button>-->
+<!--            <script language="javascript" type="text/javascript">-->
+<!--            </script>-->
+<!--            Copy-->
+<!--        </button>-->
+<!--    </div>-->
+</div>
+
+<div id="panel">
+    <div class="content was-validated"></div>
+</div>
+<div id="konsole">
+    <div class="title sticky-top">Console
+        <button class="btn btn-danger btn-sm closeKonsole" onclick="window.konsole.hide()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <div class="content"></div>
+</div>
+
+<div id="playground"></div>
+
+<div id="console" class="d-none">
+    <div class="panel-body input-console">
+        <div class="input-group-prepend">
+            <input id="consoleInput" type="text" class="form-control form-control-sm" placeholder="input event ...">
+            <button id="consolePlay" class="btn btn-outline-success btn-sm"><i id="runIcon" class="fas fa-play"></i>
+            </button>
+            <button id="consoleStop" class="btn btn-outline-dark btn-sm disabled"><i class="fas fa-stop"></i></button>
+            <button id="consoleExit" class="btn btn-danger btn-sm"><i class="fas fa-times"></i></button>
+        </div>
+    </div>
+    <div class="panel-body output-console"></div>
+</div>
+
+<div id="bottomMenu">
+    <label>Top level astds: </label>
+    <ul class="list-group list-group-horizontal" id="files">
+        <li class="list-group-item" id="newASTD" onclick="window.project.newFile()"><i class="fas fa-plus"></i></li>
+    </ul>
+</div>
+
+
+<!-- add all the dependencies and the project scripts -->
+<script src="js/libRequire.js"></script>
+<script src="js/specHeader.js" defer></script>
+<script src="js/traces/traceManager.js" defer></script>
+<script src="js/Validator.js" defer></script>
+<script src="js/console.js"></script>
+<script src="js/menu/confManager.js" defer></script>
+<script src="js/menu/menu.js" defer></script>
+<script src="js/menu/manageMenu.js" defer></script>
+<script src="js/menu/runMenu.js" defer></script>
+<script src="js/toolbar.js" defer></script>
+<script src="js/panel.js" defer></script>
+<script src="js/konsole.js" defer></script>
+<script src="js/file.js" defer></script>
+<script src="js/schemaStructure.js" defer></script>
+<script src="js/project.js" defer></script>
+<script src="js/item/item.js" defer></script>
+<script src="js/item/state.js" defer></script>
+<script src="js/item/astd.js" defer></script>
+<script src="js/tab/tab.js" defer></script>
+<script src="js/tab/Unary/Qtab.js" defer></script>
+<script src="js/tab/automaton.js" defer></script>
+<script src="js/tab/Binary/sequence.js" defer></script>
+<script src="js/tab/Binary/interrupt.js" defer></script>
+<script src="js/tab/Binary/timeout.js" defer></script>
+<script src="js/tab/Binary/PersistentTimeout.js" defer></script>
+<script src="js/tab/Binary/TimedInterrupt.js" defer></script>
+<script src="js/tab/Unary/delay.js" defer></script>
+<script src="js/tab/Unary/persistentdelay.js" defer></script>
+<script src="js/tab/Unary/persistentguard.js" defer></script>
+<script src="js/tab/Binary/flow.js" defer></script>
+<script src="js/tab/call.js" defer></script>
+<script src="js/tab/Binary/choice.js" defer></script>
+<script src="js/tab/Unary/Qchoice.js" defer></script>
+<script src="js/tab/Unary/QFlow.js" defer></script>
+<script src="js/tab/Unary/closure.js" defer></script>
+<script src="js/tab/Unary/guard.js" defer></script>
+<script src="js/tab/Binary/synchronization.js" defer></script>
+<script src="js/tab/Unary/Qsynchronization.js" defer></script>
+<script src="js/tab/Binary/parallel_composition.js" defer></script>
+<script src="js/tab/Unary/Qparallel_composition.js" defer></script>
+<script src="js/tab/Binary/interleave.js" defer></script>
+<script src="js/tab/Unary/Qinterleave.js" defer></script>
+<script src="js/Transition/link.js" defer></script>
+<script src="js/var/elem.js" defer></script>
+<script src="js/var/attribute.js" defer></script>
+<script src="js/var/parameter.js" defer></script>
+<script src="js/var/variable.js" defer></script>
+<script src="js/main.js" defer></script>
+<script src="js/Transition/LinkView.js" defer></script>
+<script src="js/Transition/flexPoint.js" defer></script>
+<script src="js/compBuilder.js" defer></script>
+
+</body>
+
+</html>

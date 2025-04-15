@@ -1,0 +1,9 @@
+node_modules
+iASTD
+.DS_Store
+package-lock.json
+editeur/package-lock.json
+
+# JetBrains WebStorm IDE
+.idea/
+

@@ -1,0 +1,18 @@
+#traceModal .list-group-flush div:first-child {
+    border-top: none;
+}
+
+#traceModal .panel-default {
+    margin: 5px 0;
+}
+
+.load-trace {
+    padding: 10px;
+    vertical-align: middle;
+}
+
+#toast-container > .toast-info {
+    background-image: none !important;
+    padding-left: 15px;
+    padding-right: 15px;
+}

@@ -1,0 +1,564 @@
+{
+    "iastd": {
+        "target": "ocaml",
+        "imports": [],
+        "type_definitions": {
+            "schemas": [],
+            "native_types": {},
+            "events": []
+        },
+        "top_level_astds": [
+            {
+                "name": "Books",
+                "parameters": [],
+                "type": "QInterleave",
+                "typed_astd": {
+                    "attributes": [],
+                    "code": "",
+                    "quantified_variable": {
+                        "name": "bId",
+                        "type": "int",
+                        "domain": {
+                            "type": "UnboundedDomain"
+                        }
+                    },
+                    "sub_astd": {
+                        "name": "",
+                        "type": "Kleene",
+                        "typed_astd": {
+                            "attributes": [],
+                            "code": "",
+                            "sub_astd": {
+                                "name": "",
+                                "type": "Automaton",
+                                "typed_astd": {
+                                    "attributes": [],
+                                    "code": "",
+                                    "states": [
+                                        {
+                                            "name": "S3",
+                                            "astd": {
+                                                "type": "Elem",
+                                                "typed_astd": {}
+                                            }
+                                        },
+                                        {
+                                            "name": "S1",
+                                            "astd": {
+                                                "name": "S1",
+                                                "type": "QChoice",
+                                                "typed_astd": {
+                                                    "attributes": [],
+                                                    "code": "",
+                                                    "quantified_variable": {
+                                                        "name": "mId",
+                                                        "type": "int",
+                                                        "domain": {
+                                                            "type": "UnboundedDomain"
+                                                        }
+                                                    },
+                                                    "sub_astd": {
+                                                        "name": "",
+                                                        "type": "Kleene",
+                                                        "typed_astd": {
+                                                            "attributes": [],
+                                                            "code": "",
+                                                            "sub_astd": {
+                                                                "name": "",
+                                                                "type": "Automaton",
+                                                                "typed_astd": {
+                                                                    "attributes": [],
+                                                                    "code": "",
+                                                                    "states": [
+                                                                        {
+                                                                            "name": "S6",
+                                                                            "astd": {
+                                                                                "type": "Elem",
+                                                                                "typed_astd": {}
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "name": "S5",
+                                                                            "astd": {
+                                                                                "type": "Elem",
+                                                                                "typed_astd": {}
+                                                                            }
+                                                                        },
+                                                                        {
+                                                                            "name": "S4",
+                                                                            "astd": {
+                                                                                "type": "Elem",
+                                                                                "typed_astd": {}
+                                                                            }
+                                                                        }
+                                                                    ],
+                                                                    "transitions": [
+                                                                        {
+                                                                            "arrow_type": "Local",
+                                                                            "arrow": {
+                                                                                "from_state_name": "S4",
+                                                                                "to_state_name": "S5"
+                                                                            },
+                                                                            "event_template": {
+                                                                                "label": "Lend",
+                                                                                "parameters": [
+                                                                                    {
+                                                                                        "parameter_kind": "Expression",
+                                                                                        "parameter": "bId"
+                                                                                    },
+                                                                                    {
+                                                                                        "parameter_kind": "Expression",
+                                                                                        "parameter": "mId"
+                                                                                    }
+                                                                                ],
+                                                                                "when": []
+                                                                            },
+                                                                            "guard": "",
+                                                                            "action": "",
+                                                                            "from_final_state_only": false
+                                                                        },
+                                                                        {
+                                                                            "arrow_type": "Local",
+                                                                            "arrow": {
+                                                                                "from_state_name": "S5",
+                                                                                "to_state_name": "S6"
+                                                                            },
+                                                                            "event_template": {
+                                                                                "label": "Return",
+                                                                                "parameters": [
+                                                                                    {
+                                                                                        "parameter_kind": "Expression",
+                                                                                        "parameter": "bId"
+                                                                                    },
+                                                                                    {
+                                                                                        "parameter_kind": "Expression",
+                                                                                        "parameter": "mId"
+                                                                                    }
+                                                                                ],
+                                                                                "when": []
+                                                                            },
+                                                                            "guard": "",
+                                                                            "action": "",
+                                                                            "from_final_state_only": false
+                                                                        },
+                                                                        {
+                                                                            "arrow_type": "Local",
+                                                                            "arrow": {
+                                                                                "from_state_name": "S5",
+                                                                                "to_state_name": "S5"
+                                                                            },
+                                                                            "event_template": {
+                                                                                "label": "Renew",
+                                                                                "parameters": [
+                                                                                    {
+                                                                                        "parameter_kind": "Expression",
+                                                                                        "parameter": "bId"
+                                                                                    },
+                                                                                    {
+                                                                                        "parameter_kind": "Expression",
+                                                                                        "parameter": "mId"
+                                                                                    }
+                                                                                ],
+                                                                                "when": []
+                                                                            },
+                                                                            "guard": "",
+                                                                            "action": "",
+                                                                            "from_final_state_only": false
+                                                                        }
+                                                                    ],
+                                                                    "shallow_final_state_names": [
+                                                                        "S6"
+                                                                    ],
+                                                                    "initial_state_name": "S4"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "name": "S0",
+                                            "astd": {
+                                                "type": "Elem",
+                                                "typed_astd": {}
+                                            }
+                                        }
+                                    ],
+                                    "transitions": [
+                                        {
+                                            "arrow_type": "Local",
+                                            "arrow": {
+                                                "from_state_name": "S0",
+                                                "to_state_name": "S1"
+                                            },
+                                            "event_template": {
+                                                "label": "Acquire",
+                                                "parameters": [
+                                                    {
+                                                        "parameter_kind": "Expression",
+                                                        "parameter": "bId"
+                                                    }
+                                                ],
+                                                "when": []
+                                            },
+                                            "guard": "",
+                                            "action": "",
+                                            "from_final_state_only": false
+                                        },
+                                        {
+                                            "arrow_type": "Local",
+                                            "arrow": {
+                                                "from_state_name": "S1",
+                                                "to_state_name": "S3"
+                                            },
+                                            "event_template": {
+                                                "label": "Discard",
+                                                "parameters": [
+                                                    {
+                                                        "parameter_kind": "Expression",
+                                                        "parameter": "bId"
+                                                    }
+                                                ],
+                                                "when": []
+                                            },
+                                            "guard": "",
+                                            "action": "",
+                                            "from_final_state_only": false
+                                        }
+                                    ],
+                                    "shallow_final_state_names": [
+                                        "S3"
+                                    ],
+                                    "deep_final_state_names": [],
+                                    "initial_state_name": "S0"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    "editor": {
+        "id": 53,
+        "schemas": [],
+        "native_types": [],
+        "imports": [],
+        "eventSignatures": [],
+        "target": "OCaml",
+        "traces": [],
+        "files": [
+            {
+                "astd": {
+                    "id": "id_0",
+                    "position": {
+                        "x": 10,
+                        "y": 2
+                    },
+                    "width": 910,
+                    "height": 670,
+                    "label": "Books",
+                    "initial": false,
+                    "entryCode": "",
+                    "stayCode": "",
+                    "exitCode": "",
+                    "class": "astd",
+                    "tabs": [
+                        {
+                            "id": "id_47",
+                            "parent": "id_0",
+                            "attributes": [],
+                            "code": "",
+                            "variable": {
+                                "parent": "id_47",
+                                "label": "bId",
+                                "type": "int",
+                                "domain": "",
+                                "domainType": "UnboundedDomain"
+                            },
+                            "class": "||| x : T",
+                            "imports": []
+                        },
+                        {
+                            "label":"",
+                            "id": "id_48",
+                            "parent": "id_0",
+                            "attributes": [],
+                            "code": "",
+                            "class": "★ Closure"
+                        },
+                        {
+                            "label":"",
+                            "id": "id_49",
+                            "parent": "id_0",
+                            "attributes": [],
+                            "code": "",
+                            "class": "Automaton"
+                        }
+                    ],
+                    "state": "non-final",
+                    "items": [
+                        {
+                            "id": "id_11",
+                            "parent": "id_0",
+                            "position": {
+                                "x": 36,
+                                "y": 425
+                            },
+                            "width": 30.72,
+                            "height": 30,
+                            "label": "S3",
+                            "initial": false,
+                            "class": "state",
+                            "final": true,
+                            "history": false,
+                            "deephistory": false
+                        },
+                        {
+                            "id": "id_5",
+                            "parent": "id_0",
+                            "position": {
+                                "x": 428,
+                                "y": 83
+                            },
+                            "width": 469,
+                            "height": 343,
+                            "label": "S1",
+                            "initial": false,
+                            "class": "astd",
+                            "tabs": [
+                                {
+                                    "id": "id_44",
+                                    "parent": "id_5",
+                                    "attributes": [],
+                                    "code": "",
+                                    "variable": {
+                                        "parent": "id_44",
+                                        "label": "mId",
+                                        "type": "int",
+                                        "domain": "",
+                                        "domainType": "UnboundedDomain"
+                                    },
+                                    "class": "| x : T"
+                                },
+                                {
+                                    "label":"",
+                                    "id": "id_45",
+                                    "parent": "id_5",
+                                    "attributes": [],
+                                    "code": "",
+                                    "class": "★ Closure"
+                                },
+                                {
+                                    "label":"",
+                                    "id": "id_46",
+                                    "parent": "id_5",
+                                    "attributes": [],
+                                    "code": "",
+                                    "class": "Automaton"
+                                }
+                            ],
+                            "state": "non-final",
+                            "items": [
+                                {
+                                    "id": "id_17",
+                                    "parent": "id_5",
+                                    "position": {
+                                        "x": 115,
+                                        "y": 233
+                                    },
+                                    "width": 30.72,
+                                    "height": 30,
+                                    "label": "S6",
+                                    "initial": false,
+                                    "class": "state",
+                                    "final": true,
+                                    "history": false,
+                                    "deephistory": false
+                                },
+                                {
+                                    "id": "id_16",
+                                    "parent": "id_5",
+                                    "position": {
+                                        "x": 388,
+                                        "y": 104
+                                    },
+                                    "width": 30.72,
+                                    "height": 30,
+                                    "label": "S5",
+                                    "initial": false,
+                                    "class": "state",
+                                    "final": false,
+                                    "history": false,
+                                    "deephistory": false
+                                },
+                                {
+                                    "id": "id_15",
+                                    "parent": "id_5",
+                                    "position": {
+                                        "x": 50,
+                                        "y": 66
+                                    },
+                                    "width": 30.72,
+                                    "height": 30,
+                                    "label": "S4",
+                                    "initial": true,
+                                    "class": "state",
+                                    "final": false,
+                                    "history": false,
+                                    "deephistory": false
+                                }
+                            ],
+                            "parameters": [],
+                            "test_parameters": []
+                        },
+                        {
+                            "id": "id_4",
+                            "parent": "id_0",
+                            "position": {
+                                "x": 98,
+                                "y": 136
+                            },
+                            "width": 30.72,
+                            "height": 30,
+                            "label": "S0",
+                            "initial": true,
+                            "class": "state",
+                            "final": false,
+                            "history": false,
+                            "deephistory": false
+                        }
+                    ],
+                    "parameters": [],
+                    "test_parameters": []
+                },
+                "links": [
+                    {
+                        "id": "id_12",
+                        "source": "id_4",
+                        "destination": "id_5",
+                        "details": true,
+                        "parameters": "bId",
+                        "guard": "",
+                        "when": "",
+                        "displayNumber": "3",
+                        "code": "",
+                        "label": "Acquire",
+                        "type": "default",
+                        "inflexion": [
+                            {
+                                "id": "id_50",
+                                "parent": "id_0",
+                                "position": {
+                                    "x": 287,
+                                    "y": 182
+                                },
+                                "width": 10,
+                                "height": 10,
+                                "label": "?",
+                                "initial": false,
+                                "entryCode": "",
+                                "stayCode": "",
+                                "exitCode": ""
+                            }
+                        ],
+                        "test_parameters": []
+                    },
+                    {
+                        "id": "id_13",
+                        "source": "id_5",
+                        "destination": "id_11",
+                        "details": true,
+                        "parameters": "bId",
+                        "guard": "",
+                        "when": "",
+                        "displayNumber": "3",
+                        "code": "",
+                        "label": "Discard",
+                        "type": "default",
+                        "inflexion": [
+                            {
+                                "id": "id_51",
+                                "parent": "id_0",
+                                "position": {
+                                    "x": 266,
+                                    "y": 399
+                                },
+                                "width": 10,
+                                "height": 10,
+                                "label": "?",
+                                "initial": false,
+                                "entryCode": "",
+                                "stayCode": "",
+                                "exitCode": ""
+                            }
+                        ],
+                        "test_parameters": []
+                    },
+                    {
+                        "id": "id_18",
+                        "source": "id_15",
+                        "destination": "id_16",
+                        "details": true,
+                        "parameters": "bId, mId",
+                        "guard": "",
+                        "when": "",
+                        "displayNumber": "33",
+                        "code": "",
+                        "label": "Lend",
+                        "type": "default",
+                        "inflexion": [],
+                        "test_parameters": []
+                    },
+                    {
+                        "id": "id_19",
+                        "source": "id_16",
+                        "destination": "id_17",
+                        "details": true,
+                        "parameters": "bId, mId",
+                        "guard": "",
+                        "when": "",
+                        "displayNumber": "334",
+                        "code": "",
+                        "label": "Return",
+                        "type": "default",
+                        "inflexion": [
+                            {
+                                "id": "id_52",
+                                "parent": "id_5",
+                                "position": {
+                                    "x": 344,
+                                    "y": 247
+                                },
+                                "width": 10,
+                                "height": 10,
+                                "label": "?",
+                                "initial": false,
+                                "entryCode": "",
+                                "stayCode": "",
+                                "exitCode": ""
+                            }
+                        ],
+                        "test_parameters": []
+                    },
+                    {
+                        "id": "id_20",
+                        "source": "id_16",
+                        "destination": "id_16",
+                        "details": true,
+                        "parameters": "bId, mId",
+                        "guard": "",
+                        "when": "",
+                        "displayNumber": "33",
+                        "code": "",
+                        "label": "Renew",
+                        "type": "default",
+                        "inflexion": [],
+                        "test_parameters": []
+                    }
+                ]
+            }
+        ]
+    }
+}

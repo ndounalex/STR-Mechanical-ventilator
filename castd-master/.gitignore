@@ -1,0 +1,4 @@
+build/*
+castd.jar
+
+json.hpp

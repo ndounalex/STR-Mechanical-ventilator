@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="rv-monitor-benchmark">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/tests/labpal/rv-monitor-benchmark.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

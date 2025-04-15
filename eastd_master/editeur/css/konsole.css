@@ -1,0 +1,47 @@
+#konsole {
+    display: none;
+    border: 1px solid black;
+    position: fixed;
+    background-color: white;
+    border-radius: 3px;
+    right: 20px;
+    bottom: 55px;
+    box-shadow: 3px 3px 6px #23272b;
+    z-index: 999;
+    height: 30%;
+    width: 40%;
+    min-width: fit-content;
+    min-height: fit-content;
+    overflow-y: auto;
+    resize: both;
+}
+
+#konsole .title {
+    background-color: #EAEAEA;
+    border-bottom: 1px solid black;
+    padding: 5px;
+    cursor: move;
+}
+
+#konsole .content {
+    padding: 5px;
+}
+
+#konsole .content div {
+    padding: 5px;
+    margin: 5px;
+    border-radius: 3px;
+}
+
+.closeKonsole {
+    margin-top: -4px;
+    float: right;
+}
+
+.error {
+    background-color: pink;
+}
+
+.warning {
+    background-color: lightyellow;
+}

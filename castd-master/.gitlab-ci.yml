@@ -1,0 +1,239 @@
+# This file is a template, and might need editing before it works on your project.
+# Auto DevOps
+# This CI/CD configuration provides a standard pipeline for
+# * building a Docker image (using a buildpack if necessary),
+# * storing the image in the container registry,
+# * running tests from a buildpack,
+# * running code quality analysis,
+# * creating a review app for each topic branch,
+# * and continuous deployment to production
+#
+# Test jobs may be disabled by setting environment variables:
+# * test: TEST_DISABLED
+# * code_quality: CODE_QUALITY_DISABLED
+# * license_management: LICENSE_MANAGEMENT_DISABLED
+# * performance: PERFORMANCE_DISABLED
+# * sast: SAST_DISABLED
+# * dependency_scanning: DEPENDENCY_SCANNING_DISABLED
+# * container_scanning: CONTAINER_SCANNING_DISABLED
+# * dast: DAST_DISABLED
+# * review: REVIEW_DISABLED
+# * stop_review: REVIEW_DISABLED
+#
+# In order to deploy, you must have a Kubernetes cluster configured either
+# via a project integration, or via group/project variables.
+# KUBE_INGRESS_BASE_DOMAIN must also be set on the cluster settings,
+# as a variable at the group or project level, or manually added below.
+#
+# Continuous deployment to production is enabled by default.
+# If you want to deploy to staging first, set STAGING_ENABLED environment variable.
+# If you want to enable incremental rollout, either manual or time based,
+# set INCREMENTAL_ROLLOUT_MODE environment variable to "manual" or "timed".
+# If you want to use canary deployments, set CANARY_ENABLED environment variable.
+#
+# If Auto DevOps fails to detect the proper buildpack, or if you want to
+# specify a custom buildpack, set a project variable `BUILDPACK_URL` to the
+# repository URL of the buildpack.
+# e.g. BUILDPACK_URL=https://github.com/heroku/heroku-buildpack-ruby.git#v142
+# If you need multiple buildpacks, add a file to your project called
+# `.buildpacks` that contains the URLs, one on each line, in order.
+# Note: Auto CI does not work with multiple buildpacks yet
+stages:
+  - build
+  - execute
+  - test
+
+build:
+  stage: build
+  script:
+     - ant
+  artifacts:
+    paths:
+     - castd.jar
+
+execute:
+  stage: execute
+  script:
+     - unzip tests/testcases/specs.zip -d tests/testcases/
+     - java -jar castd.jar --spec tests/testcases/Automaton/spec1.json  --output tests/testcases/specs/Automaton
+  artifacts:
+    paths:
+     - tests/testcases/specs/
+
+test_Automaton:
+  stage: test
+  script:
+    - java -jar castd.jar --spec tests/testcases/specs/Automaton/spec0.json  --output tests/testcases/specs/Automaton
+    - var=$(find tests/testcases/specs/Automaton -maxdepth 1 -type f  -name "test" -perm /a=x) ; [[ ! -z $var ]] && echo "===Executable Generated==="|| exit 1
+    - ./tests/testcases/specs/Automaton/test -i tests/testcases/specs/Automaton/inputs.txt > tests/testcases/specs/Automaton/execution.txt
+    - python3 checkOutput.py tests/testcases/specs/Automaton/execution.txt tests/testcases/specs/Automaton/verification.txt && echo "====Valid Execution===" || exit 1
+
+test_Automaton_Automaton:
+  stage: test
+  script:
+    - java -jar castd.jar --spec tests/testcases/specs/Automaton_Automaton/spec1.json  --output tests/testcases/specs/Automaton_Automaton
+    - var=$(find tests/testcases/specs/Automaton_Automaton -maxdepth 1 -type f  -name "test" -perm /a=x) ; [[ ! -z $var ]] && echo "===Executable Generated==="|| exit 1
+    - ./tests/testcases/specs/Automaton_Automaton/test -i tests/testcases/specs/Automaton_Automaton/inputs.txt > tests/testcases/specs/Automaton_Automaton/execution.txt
+    - python3 checkOutput.py tests/testcases/specs/Automaton_Automaton/execution.txt tests/testcases/specs/Automaton_Automaton/verification.txt && echo "====Valid Execution===" || exit 1
+
+test_Automaton_Guard:
+  stage: test
+  script:
+    - java -jar castd.jar --spec tests/testcases/specs/Automaton_Guard/spec1.json  --output tests/testcases/specs/Automaton_Guard
+    - var=$(find tests/testcases/specs/Automaton_Guard -maxdepth 1 -type f  -name "main" -perm /a=x) ; [[ ! -z $var ]] && echo "===Executable Generated==="|| exit 1
+    - ./tests/testcases/specs/Automaton_Guard/main -i tests/testcases/specs/Automaton_Guard/inputs.txt > tests/testcases/specs/Automaton_Guard/execution.txt
+    - python3 checkOutput.py tests/testcases/specs/Automaton_Guard/execution.txt tests/testcases/specs/Automaton_Guard/verification.txt && echo "====Valid Execution===" || exit 1
+
+test_Automaton_QChoice:
+  stage: test
+  script:
+    - java -jar castd.jar --spec tests/testcases/specs/Automaton_QChoice/spec1.json  --output tests/testcases/specs/Automaton_QChoice --format json
+    - var=$(find tests/testcases/specs/Automaton_QChoice -maxdepth 1 -type f  -name "main" -perm /a=x) ; [[ ! -z $var ]] && echo "===Executable Generated==="|| exit 1
+    - ./tests/testcases/specs/Automaton_QChoice/main -i tests/testcases/specs/Automaton_QChoice/inputs.txt > tests/testcases/specs/Automaton_QChoice/execution.txt
+    - python3 checkOutput.py tests/testcases/specs/Automaton_QChoice/execution.txt tests/testcases/specs/Automaton_QChoice/verification.txt && echo "====Valid Execution===" || exit 1
+
+test_Call:
+  stage: test
+  script:
+    - java -jar castd.jar --spec tests/testcases/specs/Call/spec1.json  --output tests/testcases/specs/Call
+    - var=$(find tests/testcases/specs/Call -maxdepth 1 -type f  -name "main" -perm /a=x) ; [[ ! -z $var ]] && echo "===Executable Generated==="|| exit 1
+    - ./tests/testcases/specs/Call/main -i tests/testcases/specs/Call/inputs.txt > tests/testcases/specs/Call/execution.txt
+    - python3 checkOutput.py tests/testcases/specs/Call/execution.txt tests/testcases/specs/Call/verification.txt && echo "====Valid Execution===" || exit 1
+
+test_Choice_Automaton:
+  stage: test
+  script:
+    - java -jar castd.jar --spec tests/testcases/specs/Choice_Automaton/spec1.json  --output tests/testcases/specs/Choice_Automaton
+    - var=$(find tests/testcases/specs/Choice_Automaton -maxdepth 1 -type f  -name "main" -perm /a=x) ; [[ ! -z $var ]] && echo "===Executable Generated==="|| exit 1
+    - ./tests/testcases/specs/Choice_Automaton/main -i tests/testcases/specs/Choice_Automaton/inputs1.txt > tests/testcases/specs/Choice_Automaton/execution1.txt
+    - ./tests/testcases/specs/Choice_Automaton/main -i tests/testcases/specs/Choice_Automaton/inputs2.txt > tests/testcases/specs/Choice_Automaton/execution2.txt
+    - python3 checkOutput.py tests/testcases/specs/Choice_Automaton/execution1.txt tests/testcases/specs/Choice_Automaton/verification1.txt && echo "====Valid Execution===" || exit 1
+    - python3 checkOutput.py tests/testcases/specs/Choice_Automaton/execution2.txt tests/testcases/specs/Choice_Automaton/verification2.txt && echo "====Valid Execution===" || exit 1
+
+test_Deep_History_State:
+  stage: test
+  script:
+    - java -jar castd.jar --spec tests/testcases/specs/Deep_History_State/spec1.json  --output tests/testcases/specs/Deep_History_State
+    - var=$(find tests/testcases/specs/Deep_History_State -maxdepth 1 -type f  -name "main" -perm /a=x) ; [[ ! -z $var ]] && echo "===Executable Generated==="|| exit 1
+    - ./tests/testcases/specs/Deep_History_State/main -i tests/testcases/specs/Deep_History_State/inputs.txt > tests/testcases/specs/Deep_History_State/execution.txt
+    - python3 checkOutput.py tests/testcases/specs/Deep_History_State/execution.txt tests/testcases/specs/Deep_History_State/verification.txt && echo "====Valid Execution===" || exit 1
+
+test_From_and_To_Sub:
+  stage: test
+  script:
+    - java -jar castd.jar -s tests/NewTests/test0_From_and_To_Sub/spec.json -o tests/NewTests/test0_From_and_To_Sub
+    - var=$(find tests/NewTests/test0_From_and_To_Sub -maxdepth 1 -type f  -name "a1" -perm /a=x) ; [[ ! -z $var ]] && echo "===Executable Generated==="|| exit 1
+    - ./tests/NewTests/test0_From_and_To_Sub/a1 -i tests/NewTests/test0_From_and_To_Sub/inputs.txt > tests/NewTests/test0_From_and_To_Sub/execution.txt
+    - python3 checkOutput.py tests/NewTests/test0_From_and_To_Sub/execution.txt tests/NewTests/test0_From_and_To_Sub/verification.txt && echo "====Valid Execution===" || exit 1
+
+test_Quan_Interleave_Event_Param:
+  stage: test
+  script:
+    - java -jar castd.jar -s tests/NewTests/test2_Quan_Interleave_Event_Param/spec.json -o tests/NewTests/test2_Quan_Interleave_Event_Param
+    - var=$(find tests/NewTests/test2_Quan_Interleave_Event_Param -maxdepth 1 -type f  -name "a1" -perm /a=x) ; [[ ! -z $var ]] && echo "===Executable Generated==="|| exit 1
+    - ./tests/NewTests/test2_Quan_Interleave_Event_Param/a1 -i tests/NewTests/test2_Quan_Interleave_Event_Param/inputs.txt > tests/NewTests/test2_Quan_Interleave_Event_Param/execution.txt
+    - python3 checkOutput.py tests/NewTests/test2_Quan_Interleave_Event_Param/execution.txt tests/NewTests/test2_Quan_Interleave_Event_Param/verification.txt && echo "====Valid Execution===" || exit 1
+
+test_synchronization:
+    stage: test
+    script:
+    - java -jar castd.jar -s tests/NewTests/test3_sync/spec.json -o tests/NewTests/test3_sync
+    - var=$(find tests/NewTests/test3_sync -maxdepth 1 -type f  -name "a1" -perm /a=x) ; [[ ! -z $var ]] && echo "===Executable Generated==="|| exit 1
+    - ./tests/NewTests/test3_sync/a1 -i tests/NewTests/test3_sync/inputs.txt > tests/NewTests/test3_sync/execution.txt
+    - python3 checkOutput.py tests/NewTests/test3_sync/execution.txt tests/NewTests/test3_sync/verification.txt && echo "====Valid Execution===" || exit 1
+
+test_parallel_composition:
+    stage: test
+    script:
+    - java -jar castd.jar -s tests/NewTests/test4_parallel_composition/spec.json -o tests/NewTests/test4_parallel_composition
+    - var=$(find tests/NewTests/test4_parallel_composition -maxdepth 1 -type f  -name "a1" -perm /a=x) ; [[ ! -z $var ]] && echo "===Executable Generated==="|| exit 1
+    - ./tests/NewTests/test4_parallel_composition/a1 -i tests/NewTests/test4_parallel_composition/inputs.txt > tests/NewTests/test4_parallel_composition/execution.txt
+    - python3 checkOutput.py tests/NewTests/test4_parallel_composition/execution.txt tests/NewTests/test4_parallel_composition/verification.txt && echo "====Valid Execution===" || exit 1
+
+test_double_flow:
+    stage: test
+    script:
+    - java -jar castd.jar -s tests/NewTests/test5_Double_Flow/spec.json -o tests/NewTests/test5_Double_Flow
+    - var=$(find tests/NewTests/test5_Double_Flow -maxdepth 1 -type f  -name "a1" -perm /a=x) ; [[ ! -z $var ]] && echo "===Executable Generated==="|| exit 1
+    - ./tests/NewTests/test5_Double_Flow/a1 -i tests/NewTests/test5_Double_Flow/inputs.txt > tests/NewTests/test5_Double_Flow/execution.txt
+    - python3 checkOutput.py tests/NewTests/test5_Double_Flow/execution.txt tests/NewTests/test5_Double_Flow/verification.txt && echo "====Valid Execution===" || exit 1
+
+test_double_interleave:
+      stage: test
+      script:
+      - java -jar castd.jar -s tests/NewTests/test6_Double_Interleave/spec.json -o tests/NewTests/test6_Double_Interleave
+      - var=$(find tests/NewTests/test6_Double_Interleave -maxdepth 1 -type f  -name "d" -perm /a=x) ; [[ ! -z $var ]] && echo "===Executable Generated==="|| exit 1
+      - ./tests/NewTests/test6_Double_Interleave/d -i tests/NewTests/test6_Double_Interleave/inputs.txt > tests/NewTests/test6_Double_Interleave/execution.txt
+      - python3 checkOutput.py tests/NewTests/test6_Double_Interleave/execution.txt tests/NewTests/test6_Double_Interleave/verification.txt && echo "====Valid Execution===" || exit 1
+
+test_choice:
+      stage: test
+      script:
+      - java -jar castd.jar -s tests/NewTests/test7_Choice/spec.json -o tests/NewTests/test7_Choice
+      - var=$(find tests/NewTests/test7_Choice -maxdepth 1 -type f  -name "a1" -perm /a=x) ; [[ ! -z $var ]] && echo "===Executable Generated==="|| exit 1
+      - ./tests/NewTests/test7_Choice/a1 -i tests/NewTests/test7_Choice/inputs.txt > tests/NewTests/test7_Choice/execution.txt
+      - python3 checkOutput.py tests/NewTests/test7_Choice/execution.txt tests/NewTests/test7_Choice/verification.txt && echo "====Valid Execution===" || exit 1
+
+test_double_choice:
+      stage: test
+      script:
+      - java -jar castd.jar -s tests/NewTests/test8_Double_Choice/spec.json -o tests/NewTests/test8_Double_Choice
+      - var=$(find tests/NewTests/test8_Double_Choice -maxdepth 1 -type f  -name "a1" -perm /a=x) ; [[ ! -z $var ]] && echo "===Executable Generated==="|| exit 1
+      - ./tests/NewTests/test8_Double_Choice/a1 -i tests/NewTests/test8_Double_Choice/inputs.txt > tests/NewTests/test8_Double_Choice/execution.txt
+      - python3 checkOutput.py tests/NewTests/test8_Double_Choice/execution.txt tests/NewTests/test8_Double_Choice/verification.txt && echo "====Valid Execution===" || exit 1
+
+test_sequence:
+      stage: test
+      script:
+      - java -jar castd.jar -s tests/NewTests/test9_seq/spec.json -o tests/NewTests/test9_seq
+      - var=$(find tests/NewTests/test9_seq -maxdepth 1 -type f  -name "a1" -perm /a=x) ; [[ ! -z $var ]] && echo "===Executable Generated==="|| exit 1
+      - ./tests/NewTests/test9_seq/a1 -i tests/NewTests/test9_seq/inputs.txt > tests/NewTests/test9_seq/execution.txt
+      - python3 checkOutput.py tests/NewTests/test9_seq/execution.txt tests/NewTests/test9_seq/verification.txt && echo "====Valid Execution===" || exit 1
+
+test_double_sequence:
+      stage: test
+      script:
+      - java -jar castd.jar -s tests/NewTests/test10_Double_seq/spec.json -o tests/NewTests/test10_Double_seq
+      - var=$(find tests/NewTests/test10_Double_seq -maxdepth 1 -type f  -name "a1" -perm /a=x) ; [[ ! -z $var ]] && echo "===Executable Generated==="|| exit 1
+      - ./tests/NewTests/test10_Double_seq/a1 -i tests/NewTests/test10_Double_seq/inputs.txt > tests/NewTests/test10_Double_seq/execution.txt
+      - python3 checkOutput.py tests/NewTests/test10_Double_seq/execution.txt tests/NewTests/test10_Double_seq/verification.txt && echo "====Valid Execution===" || exit 1
+
+test_closure:
+      stage: test
+      script:
+      - java -jar castd.jar -s tests/NewTests/test11_Closure/spec.json -o tests/NewTests/test11_Closure
+      - var=$(find tests/NewTests/test11_Closure -maxdepth 1 -type f  -name "a1" -perm /a=x) ; [[ ! -z $var ]] && echo "===Executable Generated==="|| exit 1
+      - ./tests/NewTests/test11_Closure/a1 -i tests/NewTests/test11_Closure/inputs.txt > tests/NewTests/test11_Closure/execution.txt
+      - python3 checkOutput.py tests/NewTests/test11_Closure/execution.txt tests/NewTests/test11_Closure/verification.txt && echo "====Valid Execution===" || exit 1
+
+test_quantified_parallel_composition:
+      stage: test
+      script:
+      - java -jar castd.jar -s tests/NewTests/test12_parallel_quant/spec.json -o tests/NewTests/test12_parallel_quant
+      - var=$(find tests/NewTests/test12_parallel_quant -maxdepth 1 -type f  -name "a1" -perm /a=x) ; [[ ! -z $var ]] && echo "===Executable Generated==="|| exit 1
+      - ./tests/NewTests/test12_parallel_quant/a1 -i tests/NewTests/test12_parallel_quant/inputs.txt > tests/NewTests/test12_parallel_quant/execution.txt
+      - python3 checkOutput.py tests/NewTests/test12_parallel_quant/execution.txt tests/NewTests/test12_parallel_quant/verification.txt && echo "====Valid Execution===" || exit 1
+
+test_quantified_choice:
+      stage: test
+      script:
+      - java -jar castd.jar -s tests/NewTests/test13_Choice_quant/spec.json -o tests/NewTests/test13_Choice_quant
+      - var=$(find tests/NewTests/test13_Choice_quant -maxdepth 1 -type f  -name "a1" -perm /a=x) ; [[ ! -z $var ]] && echo "===Executable Generated==="|| exit 1
+      - ./tests/NewTests/test13_Choice_quant/a1 -i tests/NewTests/test13_Choice_quant/inputs.txt > tests/NewTests/test13_Choice_quant/execution.txt
+      - python3 checkOutput.py tests/NewTests/test13_Choice_quant/execution.txt tests/NewTests/test13_Choice_quant/verification.txt && echo "====Valid Execution===" || exit 1
+
+test_initialization_function:
+      stage: test
+      script:
+      - java -jar castd.jar -s tests/NewTests/test16_initialization_func/spec.json -o tests/NewTests/test16_initialization_func
+      - var=$(find tests/NewTests/test16_initialization_func -maxdepth 1 -type f  -name "a1" -perm /a=x) ; [[ ! -z $var ]] && echo "===Executable Generated==="|| exit 1
+      - ./tests/NewTests/test16_initialization_func/a1 -i tests/NewTests/test16_initialization_func/inputs.txt > tests/NewTests/test16_initialization_func/execution.txt
+      - python3 checkOutput.py tests/NewTests/test16_initialization_func/execution.txt tests/NewTests/test16_initialization_func/verification.txt && echo "====Valid Execution===" || exit 1
+
+test_attributes:
+      stage: test
+      script:
+      - java -jar castd.jar -s tests/NewTests/test17_string_bool_attributes/spec.json -o tests/NewTests/test17_string_bool_attributes
+      - var=$(find tests/NewTests/test17_string_bool_attributes -maxdepth 1 -type f  -name "a1" -perm /a=x) ; [[ ! -z $var ]] && echo "===Executable Generated==="|| exit 1
+      - ./tests/NewTests/test17_string_bool_attributes/a1 -i tests/NewTests/test17_string_bool_attributes/inputs.txt > tests/NewTests/test17_string_bool_attributes/execution.txt
+      - python3 checkOutput.py tests/NewTests/test17_string_bool_attributes/execution.txt tests/NewTests/test17_string_bool_attributes/verification.txt && echo "====Valid Execution===" || exit 1

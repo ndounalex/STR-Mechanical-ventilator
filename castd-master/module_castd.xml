@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_castd" default="compile.module.castd">
+  <dirname property="module.castd.basedir" file="${ant.file.module_castd}"/>
+  
+  <property name="module.jdk.home.castd" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.castd" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.castd" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.castd" value="-encoding UTF-8 -source 8 -target 8 ${compiler.args}"/>
+  
+  <property name="castd.output.dir" value="${module.castd.basedir}/out/production/castd"/>
+  <property name="castd.testoutput.dir" value="${module.castd.basedir}/out/test/castd"/>
+  
+  <path id="castd.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="castd.module.production.classpath">
+    <path refid="${module.jdk.classpath.castd}"/>
+    <path refid="library.libs.classpath"/>
+  </path>
+  
+  <path id="castd.runtime.production.module.classpath">
+    <pathelement location="${castd.output.dir}"/>
+    <path refid="library.libs.classpath"/>
+  </path>
+  
+  <path id="castd.module.classpath">
+    <path refid="${module.jdk.classpath.castd}"/>
+    <pathelement location="${castd.output.dir}"/>
+    <path refid="library.libs.classpath"/>
+  </path>
+  
+  <path id="castd.runtime.module.classpath">
+    <pathelement location="${castd.testoutput.dir}"/>
+    <pathelement location="${castd.output.dir}"/>
+    <path refid="library.libs.classpath"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.castd">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.castd">
+    <patternset refid="excluded.from.module.castd"/>
+  </patternset>
+  
+  <path id="castd.module.sourcepath">
+    <dirset dir="${module.castd.basedir}">
+      <include name="src"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.castd" depends="compile.module.castd.production,compile.module.castd.tests" description="Compile module castd"/>
+  
+  <target name="compile.module.castd.production" depends="register.custom.compilers" description="Compile module castd; production classes">
+    <mkdir dir="${castd.output.dir}"/>
+    <javac2 destdir="${castd.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.castd}/javac">
+      <compilerarg line="${compiler.args.castd}"/>
+      <bootclasspath refid="castd.module.bootclasspath"/>
+      <classpath refid="castd.module.production.classpath"/>
+      <src refid="castd.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.castd"/>
+    </javac2>
+    
+    <copy todir="${castd.output.dir}">
+      <fileset dir="${module.castd.basedir}/src">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.castd.tests" depends="register.custom.compilers,compile.module.castd.production" description="compile module castd; test classes" unless="skip.tests"/>
+  
+  <target name="clean.module.castd" description="cleanup module">
+    <delete dir="${castd.output.dir}"/>
+    <delete dir="${castd.testoutput.dir}"/>
+  </target>
+</project>

@@ -1,0 +1,19 @@
+# Compiler configurations
+castd_version: "0.10"
+
+# Supported compilers
+native_compilers:
+  GCC_HOME : /usr/bin/gcc-6 
+  JAVA_HOME : /**/
+  OCAML_HOME : /**/
+  // add more
+# set default configs
+default_compiler: GCC
+
+# target paths
+target_dir: /home/local/USHERBROOKE/ngal1802/
+
+# source paths
+source_dir: /home/local/USHERBROOKE/ngal1802/
+
+

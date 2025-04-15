@@ -1,0 +1,1071 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "$id": "spec-schema",
+  "title": "ASTD specification format",
+  "description": "This schema validates the json structure of a specification.",
+  "definitions": {
+    "astd": {
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/astd_type"
+        },
+        "typed_astd": {}
+      },
+      "oneOf": [
+        {
+          "required": [
+            "typed_astd"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Automaton"
+              ]
+            },
+            "typed_astd": {
+              "$ref": "#/definitions/astds/automaton"
+            }
+          }
+        },
+        {
+          "required": [
+            "typed_astd"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Sequence"
+              ]
+            },
+            "typed_astd": {
+              "$ref": "#/definitions/astds/sequence"
+            }
+          }
+        },
+        {
+          "required": [
+            "typed_astd"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Interrupt"
+              ]
+            },
+            "typed_astd": {
+              "$ref": "#/definitions/astds/interrupt"
+            }
+          }
+        },
+        {
+          "required": [
+            "typed_astd"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Timeout"
+              ]
+            },
+            "typed_astd": {
+              "$ref": "#/definitions/astds/timeout"
+            }
+          }
+        },
+        {
+          "required": [
+            "typed_astd"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Persistent Timeout"
+              ]
+            },
+            "typed_astd": {
+              "$ref": "#/definitions/astds/persistenttimeout"
+            }
+          }
+        },
+        {
+          "required": [
+            "typed_astd"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Timed Interrupt"
+              ]
+            },
+            "typed_astd": {
+              "$ref": "#/definitions/astds/timedinterrupt"
+            }
+          }
+        },
+        {
+          "required": [
+            "typed_astd"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Choice"
+              ]
+            },
+            "typed_astd": {
+              "$ref": "#/definitions/astds/choice"
+            }
+          }
+        },
+        {
+          "required": [
+            "typed_astd"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Kleene"
+              ]
+            },
+            "typed_astd": {
+              "$ref": "#/definitions/astds/kleene"
+            }
+          }
+        },
+        {
+          "required": [
+            "typed_astd"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Synchronization"
+              ]
+            },
+            "typed_astd": {
+              "$ref": "#/definitions/astds/synchronization"
+            }
+          }
+        },
+        {
+          "required": [
+            "typed_astd"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Interleave"
+              ]
+            },
+            "typed_astd": {
+              "$ref": "#/definitions/astds/interleave"
+            }
+          }
+        },
+        {
+          "required": [
+            "typed_astd"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "ParallelComposition"
+              ]
+            },
+            "typed_astd": {
+              "$ref": "#/definitions/astds/parallelcomposition"
+            }
+          }
+        },
+        {
+          "required": [
+            "typed_astd"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "QChoice"
+              ]
+            },
+            "typed_astd": {
+              "$ref": "#/definitions/astds/qchoice"
+            }
+          }
+        },
+        {
+          "required": [
+            "typed_astd"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Delay"
+              ]
+            },
+            "typed_astd": {
+              "$ref": "#/definitions/astds/delay"
+            }
+          }
+        },
+        {
+          "required": [
+            "typed_astd"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Persistent Delay"
+              ]
+            },
+            "typed_astd": {
+              "$ref": "#/definitions/astds/persistentdelay"
+            }
+          }
+        },
+        {
+          "required": [
+            "typed_astd"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "QSynchronization"
+              ]
+            },
+            "typed_astd": {
+              "$ref": "#/definitions/astds/qsynchronization"
+            }
+          }
+        },
+        {
+          "required": [
+            "typed_astd"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "QInterleave"
+              ]
+            },
+            "typed_astd": {
+              "$ref": "#/definitions/astds/qinterleave"
+            }
+          }
+        },
+        {
+          "required": [
+            "typed_astd"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "QParallelComposition"
+              ]
+            },
+            "typed_astd": {
+              "$ref": "#/definitions/astds/qparallelcomposition"
+            }
+          }
+        },
+        {
+          "required": [
+            "typed_astd"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Guard"
+              ]
+            },
+            "typed_astd": {
+              "$ref": "#/definitions/astds/guard"
+            }
+          }
+        },
+        {
+          "required": [
+            "typed_astd"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Persistent Guard"
+              ]
+            },
+            "typed_astd": {
+              "$ref": "#/definitions/astds/persistentguard"
+            }
+          }
+        },
+        {
+          "required": [
+            "typed_astd"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Flow"
+              ]
+            },
+            "typed_astd": {
+              "$ref": "#/definitions/astds/flow"
+            }
+          }
+        },
+        {
+          "required": [
+            "typed_astd"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Call"
+              ]
+            },
+            "typed_astd": {
+              "$ref": "#/definitions/astds/call"
+            }
+          }
+        },
+        {
+          "properties": {
+            "type": {
+              "enum": [
+                "Elem"
+              ]
+            },
+            "typed_astd": {
+              "type": "object",
+              "additionalProperties": false,
+              "properties": {}
+            }
+          }
+        }
+      ]
+    },
+    "astd_type": {
+      "type": "string",
+      "enum": [
+        "Automaton",
+        "Sequence",
+        "Interrupt",
+        "Timeout",
+        "PersistentTimeout",
+        "TimedInterrupt",
+        "Delay",
+        "Persistent Delay",
+        "Choice",
+        "Kleene",
+        "Synchronization",
+        "Interleave",
+        "ParallelComposition",
+        "QChoice",
+        "QSynchronization",
+        "QInterleave",
+        "QParallelComposition",
+        "Guard",
+        "PersistentGuard",
+        "Flow",
+        "Call",
+        "Elem"
+      ]
+    },
+    "domain": {
+      "type": "object",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "UnboundedDomain",
+            "EnumeratedDomain",
+            "IntegerDomainExpression"
+          ]
+        }
+      },
+      "oneOf": [
+        {
+          "properties": {
+            "type": {
+              "enum": [
+                "UnboundedDomain"
+              ]
+            },
+            "value": {
+              "type": "null"
+            }
+          }
+        },
+        {
+          "required": [
+            "value"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "EnumeratedDomain"
+              ]
+            },
+            "value": {
+              "type": "array"
+            }
+          }
+        },
+        {
+          "required": [
+            "value"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "IntegerDomainExpression"
+              ]
+            },
+            "value": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "variable": {
+      "type": "object",
+      "required": [
+        "name",
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "domain_bounded_variable": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/variable"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "domain": {
+              "$ref": "#/definitions/domain"
+            }
+          }
+        }
+      ]
+    },
+    "attribute": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/variable"
+        },
+        {
+          "type": "object",
+          "required": [
+            "initial_value"
+          ],
+          "properties": {
+            "initial_value": {}
+          }
+        }
+      ]
+    },
+    "attributes": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/attribute"
+      }
+    },
+    "action": {
+      "type": "string"
+    },
+    "guard": {
+      "oneOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "object",
+          "required": [
+            "filename"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "filename": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "quantified_variable": {
+      "$ref": "#/definitions/domain_bounded_variable"
+    },
+    "call_argument": {
+      "type": "object",
+      "required": [
+        "name",
+        "value"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "object",
+          "required": [
+            "type",
+            "content"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "Expression",
+                "Constant"
+              ]
+            },
+            "content": {}
+          },
+          "oneOf": [
+            {
+              "properties": {
+                "type": {
+                  "enum": [
+                    "Expression"
+                  ]
+                },
+                "content": {
+                  "type": "string"
+                }
+              }
+            },
+            {
+              "properties": {
+                "type": {
+                  "enum": [
+                    "Constant"
+                  ]
+                },
+                "content": {}
+              }
+            }
+          ]
+        }
+      }
+    },
+    "astds": {
+      "scoped_astd": {
+        "type": "object",
+        "properties": {
+          "attributes": {
+            "$ref": "#/definitions/attributes"
+          },
+          "code": {
+            "$ref": "#/definitions/action"
+          }
+        }
+      },
+      "unary_astd": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/astds/scoped_astd"
+          },
+          {
+            "type": "object",
+            "required": [
+              "sub_astd"
+            ],
+            "properties": {
+              "sub_astd": {
+                "$ref": "#/definitions/astd"
+              }
+            }
+          }
+        ]
+      },
+      "binary_astd": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/astds/scoped_astd"
+          },
+          {
+            "type": "object",
+            "required": [
+              "left_astd",
+              "right_astd"
+            ],
+            "properties": {
+              "left_astd": {
+                "$ref": "#/definitions/astd"
+              },
+              "right_astd": {
+                "$ref": "#/definitions/astd"
+              }
+            }
+          }
+        ]
+      },
+      "quantified_astd": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/astds/unary_astd"
+          },
+          {
+            "type": "object",
+            "required": [
+              "quantified_variable"
+            ],
+            "properties": {
+              "quantified_variable": {
+                "$ref": "#/definitions/quantified_variable"
+              }
+            }
+          }
+        ]
+      },
+      "automaton": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/astds/scoped_astd"
+          },
+          {
+            "type": "object",
+            "required": [
+              "states",
+              "initial_state_name"
+            ],
+            "properties": {
+              "states": {
+                "type": "array",
+                "minItems": 1,
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "name",
+                    "astd"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "astd": {
+                      "$ref": "#/definitions/astd"
+                    },
+                    "entry_code": {
+                      "$ref": "#/definitions/action"
+                    },
+                    "stay_code": {
+                      "$ref": "#/definitions/action"
+                    },
+                    "exit_code": {
+                      "$ref": "#/definitions/action"
+                    }
+                  }
+                }
+              },
+              "transitions": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "arrow_type",
+                    "event_template"
+                  ],
+                  "additionalProperties": false,
+                  "properties": {
+                    "arrow_type": {
+                      "type": "string",
+                      "enum": [
+                        "Local",
+                        "ToSub",
+                        "FromSub"
+                      ]
+                    },
+                    "arrow": {},
+                    "event_template": {
+                      "type": "object",
+                      "required": [
+                        "label"
+                      ],
+                      "additionalProperties": false,
+                      "properties": {
+                        "label": {
+                          "type": "string"
+                        },
+                        "parameters": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "required": [
+                              "parameter_kind"
+                            ],
+                            "additionalProperties": false,
+                            "properties": {
+                              "parameter_kind": {
+                                "type": "string",
+                                "enum": [
+                                  "Expression",
+                                  "Capture",
+                                  "Joker",
+                                  "Constant"
+                                ]
+                              },
+                              "parameter": {}
+                            },
+                            "oneOf": [
+                              {
+                                "required": [
+                                  "parameter"
+                                ],
+                                "properties": {
+                                  "parameter_kind": {
+                                    "enum": [
+                                      "Expression"
+                                    ]
+                                  },
+                                  "parameter": {
+                                    "type": "string"
+                                  }
+                                }
+                              },
+                              {
+                                "required": [
+                                  "parameter"
+                                ],
+                                "properties": {
+                                  "parameter_kind": {
+                                    "enum": [
+                                      "Constant"
+                                    ]
+                                  },
+                                  "parameter": {}
+                                }
+                              },
+                              {
+                                "required": [
+                                  "parameter"
+                                ],
+                                "properties": {
+                                  "parameter_kind": {
+                                    "enum": [
+                                      "Capture"
+                                    ]
+                                  },
+                                  "parameter": {
+                                    "type": "object",
+                                    "required": [
+                                      "variable_name",
+                                      "type"
+                                    ],
+                                    "additionalProperties": false,
+                                    "properties": {
+                                      "variable_name": {
+                                        "type": "string"
+                                      },
+                                      "type": {
+                                        "type": "string"
+                                      }
+                                    }
+                                  }
+                                }
+                              },
+                              {
+                                "properties": {
+                                  "parameter_kind": {
+                                    "enum": [
+                                      "Joker"
+                                    ]
+                                  },
+                                  "parameter": {
+                                    "type": "null"
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                        },
+                        "when": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "guard": {
+                      "$ref": "#/definitions/guard"
+                    },
+                    "action": {
+                      "$ref": "#/definitions/guard"
+                    },
+                    "from_final_state_only": {
+                      "type": "boolean"
+                    }
+                  },
+                  "oneOf": [
+                    {
+                      "properties": {
+                        "arrow_type": {
+                          "enum": [
+                            "ToSub",
+                            "FromSub"
+                          ]
+                        },
+                        "arrow": {
+                          "type": "object",
+                          "required": [
+                            "from_state_name",
+                            "to_state_name",
+                            "through_state_name"
+                          ],
+                          "additionalProperties": false,
+                          "properties": {
+                            "from_state_name": {
+                              "type": "string"
+                            },
+                            "to_state_name": {
+                              "type": "string"
+                            },
+                            "through_state_name": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    },
+                    {
+                      "properties": {
+                        "arrow_type": {
+                          "enum": [
+                            "Local"
+                          ]
+                        },
+                        "arrow": {
+                          "type": "object",
+                          "required": [
+                            "from_state_name",
+                            "to_state_name"
+                          ],
+                          "additionalProperties": false,
+                          "properties": {
+                            "from_state_name": {
+                              "type": "string"
+                            },
+                            "to_state_name": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              },
+              "shallow_final_state_names": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "deep_final_state_names": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "initial_state_name": {
+                "type": "string"
+              }
+            }
+          }
+        ]
+      },
+      "sequence": {
+        "$ref": "#/definitions/astds/binary_astd"
+      },
+      "interrupt": {
+        "$ref": "#/definitions/astds/binary_astd"
+      },      
+      "timeout": {
+        "$ref": "#/definitions/astds/binary_astd"
+      },      
+      "persistenttimeout": {
+        "$ref": "#/definitions/astds/binary_astd"
+      },
+      "timedinterrupt": {
+        "$ref": "#/definitions/astds/binary_astd"
+      },
+      "choice": {
+        "$ref": "#/definitions/astds/binary_astd"
+      },
+      "kleene": {
+        "$ref": "#/definitions/astds/unary_astd"
+      },
+      "delay": {
+        "$ref": "#/definitions/astds/unary_astd"
+      },
+      "persistentguard": {
+        "$ref": "#/definitions/astds/unary_astd"
+      },
+      "persistentdelay": {
+        "$ref": "#/definitions/astds/unary_astd"
+      },
+      "synchronization": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/astds/binary_astd"
+          },
+          {
+            "type": "object",
+            "required": [
+              "synchronization_set"
+            ],
+            "properties": {
+              "synchronization_set": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "interleave": {
+        "$ref": "#/definitions/astds/binary_astd"
+      },
+      "parallelcomposition": {
+        "$ref": "#/definitions/astds/binary_astd"
+      },
+      "qchoice": {
+        "$ref": "#/definitions/astds/quantified_astd"
+      },
+      "qsynchronization": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/astds/quantified_astd"
+          },
+          {
+            "type": "object",
+            "required": [
+              "synchronization_set"
+            ],
+            "properties": {
+              "synchronization_set": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        ]
+      },
+      "qinterleave": {
+        "$ref": "#/definitions/astds/quantified_astd"
+      },
+      "qparallelcomposition": {
+        "$ref": "#/definitions/astds/quantified_astd"
+      },
+      "guard": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/astds/unary_astd"
+          },
+          {
+            "type": "object",
+            "required": [
+              "guard"
+            ],
+            "properties": {
+              "guard": {
+                "$ref": "#/definitions/guard"
+              }
+            }
+          }
+        ]
+      },
+      "flow": {
+        "$ref": "#/definitions/astds/binary_astd"
+      },
+      "call": {
+        "type": "object",
+        "required": [
+          "called_astd_name"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "called_astd_name": {
+            "type": "string"
+          },
+          "call_arguments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/call_argument"
+            }
+          }
+        }
+      }
+    }
+  },
+  "type": "object",
+  "required": [
+    "target",
+    "imports",
+    "top_level_astds"
+  ],
+  "properties": {
+    "target" : { 
+      "type" : "string",
+      "enum" : ["ocaml", "c++" ]
+    },
+    "imports": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "top_level_astds": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "allOf": [
+          {
+            "$ref": "#/definitions/astd"
+          },
+          {
+            "type": "object",
+            "required": [
+              "name"
+            ],
+            "properties": {
+              "name": {},
+              "parameters": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/domain_bounded_variable"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

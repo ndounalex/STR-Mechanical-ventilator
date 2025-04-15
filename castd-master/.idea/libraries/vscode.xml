@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="vscode">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/tests/diego/guard/output/vscode.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

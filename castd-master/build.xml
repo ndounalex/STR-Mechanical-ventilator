@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<project name="castd" default="make" basedir=".">
+ 
+    
+    <!-- Property Section -->
+    <property name="build.dir" value="build" />
+    
+    
+    <!-- Classpath for libs -->
+    <path id="classpath">
+        <fileset dir="${basedir}/libs/" includes="*.jar"/>
+    </path>
+    
+    
+    <!-- Clean old build -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+        <delete dir="${build.dir}/classes"/>
+    </target>
+    
+    
+    <!-- Prepare for new build -->
+    <target name="init" depends="clean">   
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${build.dir}/classes"/>
+    </target>
+    
+    
+    <!-- Compile build -->
+    <target name="compile" depends="init">
+        <javac destdir="build/classes" debug="true" srcdir="src">
+            <classpath refid="classpath"/>
+        </javac>
+    </target>    
+    
+    
+    <!-- Build section -->
+    <target name ="make" depends="compile">
+        <jar jarfile="castd.jar" basedir="${build.dir}/classes">
+            <manifest>
+                <attribute name = "Main-Class" value ="com.udes.compiler.Compiler"/>
+            </manifest>
+            <zipfileset src ="${basedir}/libs/json-simple-1.1.jar" />
+            <zipfileset src ="${basedir}/libs/commons-cli-1.4.jar" />
+            <zipfileset src ="${basedir}/libs/jaxb-api-2.3.1.jar"  />
+            <fileset    file="${basedir}/res/clang_CPP.properties" />
+            <fileset    file="${basedir}/res/jlang_JAVA.properties"/>
+        </jar>
+    </target>
+    
+    
+</project>
+

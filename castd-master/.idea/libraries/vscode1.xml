@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="vscode1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/tests/diego/flowWguard/output/vscode.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,285 @@
+#playground {
+    position: relative;
+    overflow: auto;
+    height: calc(100% - 88px);
+}
+
+#playground .file {
+    width: 4000px;
+    height: 4000px;
+    float: left;
+    position: relative;
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAkAAAAJCAYAAADgkQYQAAAAIklEQVQoU2NkwARSDAwMz5CFGemvCOQGvGAA3ITuHoxwAgAluwgkrv+ttAAAAABJRU5ErkJggg==) repeat;
+    display: none;
+}
+
+#playground .file.selected {
+    display: block;
+}
+
+#playground .file.selected.print {
+    background: none;
+    position: absolute;
+}
+
+#playground .file .jtk-overlay,
+#playground .file .jtk-endpoint,
+svg {
+    z-index: 1;
+}
+
+#playground .file .item {
+    position: absolute;
+    cursor: move;
+    user-select: none;
+}
+
+
+#playground .file .item.selected,
+#playground .file .item.selected li {
+    border-color: black;
+}
+
+#playground .file .item.state {
+    height: 50px;
+    width: 50px;
+    background-color: white;
+}
+
+#playground .file .item.state .initial, #playground .file .item.astd > .initial {
+	margin: 0;
+	position: absolute;
+	display: none;
+	left: -9px;
+	margin-top: 20px;
+	margin-right: 1px;
+	height: 5px;
+    width: 5px;
+    -ms-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    border: none;
+    border-top: 1px solid black;
+    border-right: 1px solid black;
+}
+
+#playground .file .item.astd>.initial {
+    margin-top: 50%;
+}
+
+#playground .file .item.state .content {
+	border: 1px solid black;
+	text-align: center;
+	height: 100%;
+	width: 100%;
+	border-radius: 50%;
+	line-height: 44px;
+	font-size: 95%;
+}
+
+#playground .ui-resizable-se {
+	right: -7px;
+    bottom: -7px;
+}
+
+#playground .file .item.state .content .label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#playground .file .item.state .content .label:hover {
+    overflow: visible;
+}
+
+#playground .file .state.current .content {
+    background-color:  #b0f0ad;
+}
+
+#playground .selected-linklabel,
+#playground .file .state.selected .content {
+    border-color: #d4675f;
+    color: #d4675f;
+}
+
+#playground .file .state p {
+    margin: 0;
+}
+
+#playground .file .item.state.final .content {
+    border-style: double;
+    border-width: 4px;
+}
+
+#playground .file .astd {
+    width: 250px;
+    height: 270px;
+    border: 0;
+}
+
+#playground .file .astd.selected>ul,
+.astd.selected>ul li,
+.astd.selected>.content {
+    border-color: #d4675f;
+}
+
+#playground .file .astd ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    height: 20px;
+    z-index: 999;
+}
+
+#playground .file .astd ul li {
+    float: left;
+    border-right: 1px solid black;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    background-color: white;
+    height: 26px;
+    font: normal normal normal 18px FontAwesome;
+    font-family: "Font Awesome 5", sans-serif;
+    cursor: pointer;
+}
+
+#playground .file .astd>.label {
+    float: right;
+    border-left: 1px solid black;
+    border-bottom: 1px solid black;
+}
+
+#playground .file .astd>.content {
+    height: 100%;
+    width: 100%;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    border-top: 1px solid black;
+    background-color: white;
+    text-align: center;
+    position: absolute;
+}
+
+#playground .file .astd.selected>.content {
+    border-color: #d4675f;
+    border-width: 2px;
+}
+
+#playground .file .astd.current>.content {
+    outline: 4px solid #5dc257;
+}
+
+#playground .file .astd>.ui-resizable-s {
+    bottom: 0;
+}
+
+#playground .file .astd>.ui-resizable {
+    margin-bottom: -50px;
+}
+
+#playground .file .astd.shallow-final>.content {
+    box-shadow: 10px 10px 5px #BCBCBC;
+}
+
+#playground .file .astd.deep-final>.content {
+    box-shadow: 10px 10px 5px #000000;
+}
+
+#playground .file .astd #add {
+    border-top: none;
+}
+
+#addTab {
+    position: relative;
+    cursor: pointer;
+    display: block;
+    width: 23px;
+    height: 19px;
+    background-color: white;
+}
+
+#addTab:after {
+    font: normal normal normal 12px/1 FontAwesome;
+    font-family: "Font Awesome 5";
+    content: "\2795";
+    text-align: center;
+    position: absolute;
+    top: 20%;
+    left: 8%;
+    background-color: #fff;
+    text-rendering: optimizeLegibility;
+}
+
+#selectTab {
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+    letter-spacing: -0.4px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    color: #292929;
+    outline: none;
+    background-color: #fff;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    border: none;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    padding-right: 10%;
+    box-sizing: content-box;
+    position: relative;
+    z-index: 1;
+}
+
+svg.jtk-connector {
+    cursor: pointer;
+}
+
+#parameters {
+    display: none;
+}
+
+.jtk-overlay {
+    cursor: pointer;
+    font-size: 20px;
+}
+
+#event {
+    display: block;
+}
+
+.expanded #parameters {
+    display: block;
+}
+
+.expanded #event {
+    display: none;
+}
+
+#fullLabel{
+    display: none;
+    overflow-wrap: break-word;
+}
+
+#compLabel{
+    display: block;
+    overflow-wrap: break-word;
+}
+
+.expand #compLabel {
+    display: none;
+}
+
+.expand #fullLabel {
+    display: block;
+}

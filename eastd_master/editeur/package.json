@@ -1,0 +1,29 @@
+{
+  "name": "eASTD",
+  "version": "1.0.0",
+  "description": "Graphical editor to make ASTDs than can be interpreted by iASTD",
+  "scripts": {
+    "fix": "eslint --fix .",
+    "check": "eslint .",
+    "check_export": "ajv -s scripts/export_tests/spec.new.schema.json -d spec.json",
+    "testExportSpec": "cd scripts/export_tests && node validate_tests.js && cd ../..",
+    "runAllTest": "cd scripts && ./runAllTest.sh && cd .."
+  },
+  "devDependencies": {
+    "ajv-cli": "^3.2.1",
+    "eslint": "^7.4.0"
+  },
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "jquery-ui-bundle": "^1.12.1",
+    "jquery-contextmenu": "^2.9.2",
+    "toastr": "^2.1.4",
+    "nearley": "^2.19.4",
+    "jsplumb": "^2.13.3",
+    "ajv": "^6.12.2",
+    "html2canvas": "^1.0.0-rc.5",
+    "moo": "^0.5.1",
+    "popper.js": "^1.16.1",
+    "bootstrap": "^4.5.0"
+  }
+}

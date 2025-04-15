@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="castd">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/castd.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -1,0 +1,31 @@
+{
+  "name": "eastd",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron --disable-gpu-sandbox .",
+    "postinstall": "cd editeur && npm install",
+    "check": "eslint .",
+    "fix": "eslint --fix ."
+  },
+  "repository": "",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "author": "",
+  "license": "CC0-1.0",
+  "devDependencies": {
+    "eslint": "^7.4.0",
+    "nodemon": "^3.1.7"
+  },
+  "dependencies": {
+    "death": "^1.1.0",
+    "electron": "^9.1.0",
+    "xmlbuilder2": "^3.1.1"
+  }
+}

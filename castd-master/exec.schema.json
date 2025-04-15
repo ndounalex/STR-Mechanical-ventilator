@@ -1,0 +1,460 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema",
+  "$id": "execution-schema",
+  "title": "ASTD event execution format",
+  "description": "This schema validates the json structure detailing the execution of an event on an ASTD.",
+  "definitions": {
+    "astd": {
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/astd_type"
+        }
+      },
+      "oneOf": [
+        {
+          "type": "object",
+          "required": [
+            "name",
+            "attributes",
+            "current_state_name",
+            "current_sub_state",
+            "history"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Automaton"
+              ]
+            },
+            "name": {
+              "type": "string"
+            },
+            "attributes": {
+              "$ref": "#/definitions/attributes"
+            },
+            "current_state_name": {
+              "type": "string"
+            },
+            "current_sub_state": {
+              "$ref": "#/definitions/astd"
+            },
+            "history": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "required": [
+                  "name",
+                  "state"
+                ],
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  },
+                  "state": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/definitions/astd"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "name",
+            "step",
+            "current_sub_state",
+            "attributes"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Sequence"
+              ]
+            },
+            "name": {
+              "type": "string"
+            },
+            "step": {
+              "enum": [
+                "First",
+                "Second"
+              ]
+            },
+            "current_sub_state": {
+              "$ref": "#/definitions/astd"
+            },
+            "attributes": {
+              "$ref": "#/definitions/attributes"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "name",
+            "side",
+            "current_sub_state",
+            "attributes"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Choice"
+              ]
+            },
+            "name": {
+              "type": "string"
+            },
+            "side": {
+              "enum": [
+                "Left",
+                "Right",
+                null
+              ]
+            },
+            "current_sub_state": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/astd"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "attributes": {
+              "$ref": "#/definitions/attributes"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "name",
+            "started",
+            "current_sub_state",
+            "attributes"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Kleene"
+              ]
+            },
+            "name": {
+              "type": "string"
+            },
+            "started": {
+              "type": "boolean"
+            },
+            "current_sub_state": {
+              "$ref": "#/definitions/astd"
+            },
+            "attributes": {
+              "$ref": "#/definitions/attributes"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "name",
+            "left",
+            "right",
+            "attributes"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Synchronization"
+              ]
+            },
+            "name": {
+              "type": "string"
+            },
+            "left": {
+              "$ref": "#/definitions/astd"
+            },
+            "right": {
+              "$ref": "#/definitions/astd"
+            },
+            "attributes": {
+              "$ref": "#/definitions/attributes"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "name",
+            "qchoice_var",
+            "value",
+            "current_sub_state",
+            "attributes"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "QChoice"
+              ]
+            },
+            "name": {
+              "type": "string"
+            },
+            "qchoice_var": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "value": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "current_sub_state": {
+              "oneOf": [
+                {
+                  "$ref": "#/definitions/astd"
+                },
+                {
+                  "type": "null"
+                }
+              ]
+            },
+            "attributes": {
+              "$ref": "#/definitions/attributes"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "name",
+            "sub_states",
+            "attributes"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "QSynchronization"
+              ]
+            },
+            "name": {
+              "type": "string"
+            },
+            "sub_states": {
+              "oneOf": [
+                {
+                  "type": "null"
+                },
+                {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "qsynch_var",
+                      "value",
+                      "current_sub_state"
+                    ],
+                    "properties": {
+                      "qsynch_var": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "type": "string"
+                      },
+                      "current_sub_state": {
+                        "$ref": "#/definitions/astd"
+                      }
+                    }
+                  }
+                }
+              ]
+            },
+            "attributes": {
+              "$ref": "#/definitions/attributes"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "name",
+            "started",
+            "current_sub_state",
+            "attributes"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Guard"
+              ]
+            },
+            "name": {
+              "type": "string"
+            },
+            "started": {
+              "type": "boolean"
+            },
+            "current_sub_state": {
+              "$ref": "#/definitions/astd"
+            },
+            "attributes": {
+              "$ref": "#/definitions/attributes"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "name",
+            "started",
+            "called_astd"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Call"
+              ]
+            },
+            "name": {
+              "type": "string"
+            },
+            "started": {
+              "type": "boolean"
+            },
+            "called_astd": {
+              "$ref": "#/definitions/astd"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "required": [
+            "name",
+            "left",
+            "right",
+            "attributes"
+          ],
+          "properties": {
+            "type": {
+              "enum": [
+                "Flow"
+              ]
+            },
+            "name": {
+              "type": "string"
+            },
+            "left": {
+              "$ref": "#/definitions/astd"
+            },
+            "right": {
+              "$ref": "#/definitions/astd"
+            },
+            "attributes": {
+              "$ref": "#/definitions/attributes"
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "enum": [
+                "Elem"
+              ]
+            }
+          },
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "null"
+            }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "attributes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "type",
+          "current_value"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          },
+          "current_value": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "astd_type": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "enum": [
+        "Automaton",
+        "Sequence",
+        "Choice",
+        "Kleene",
+        "Synchronization",
+        "QChoice",
+        "QSynchronization",
+        "Guard",
+        "Call",
+        "Flow",
+        "Elem",
+        null
+      ]
+    }
+  },
+  "type": "object",
+  "required": [
+    "executed_event",
+    "top_level_astd"
+  ],
+  "properties": {
+    "executed_event": {
+      "type": "string"
+    },
+    "top_level_astd": {
+      "$ref": "#/definitions/astd"
+    }
+  }
+}

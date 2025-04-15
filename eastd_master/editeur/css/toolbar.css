@@ -1,0 +1,30 @@
+#toolbar {
+	border: 1px solid black;
+	border-radius: 3px;
+	position: fixed;
+	background-color: rgb(240,240,240);
+	right: 25px;
+	width: fit-content;
+	height: fit-content;
+	top: 60px;
+	z-index: 1;
+	cursor: move;
+}
+
+#toolbar .content .option {
+	cursor: pointer;
+	padding: 10px;
+	margin: 5px;
+	color: #454545;
+}
+
+#toolbar .content .option:hover {
+	transition-duration: 0.3s;
+	color: #d4675f;
+}
+
+#toolbar .content .option.selected {
+	color: #d4675f;
+	background-color: rgb(230,230,230);
+	border-radius: 2px;
+}

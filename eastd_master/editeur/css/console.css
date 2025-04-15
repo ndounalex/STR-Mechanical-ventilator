@@ -1,0 +1,16 @@
+#console {
+    font-size: 16px;
+    background-color: #23272b;
+    color: #dee2e6;
+}
+
+.output-console {
+    overflow-y: scroll;
+    min-height: 180px;
+    height: 180px;
+}
+
+.input-console {
+    min-height: 20px;
+    background-color: white;
+}
